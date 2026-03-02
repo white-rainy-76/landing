@@ -423,11 +423,13 @@
   }
 }
 
-/* Mobile — hero на весь экран, скейл отключён */
+/* Mobile — hero на весь экран, скейл отключён. 100dvh = видимая высота на iOS (без бага 100vh). */
 @media (max-width: 768px) {
   .hero-wrapper {
     height: 100vh;
+    height: 100dvh;
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     overflow: hidden;
     align-items: center;
     justify-content: center;

@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+  /* Скролл — у document (body), не у контейнера: так на iOS не ломается прокрутка */
   position: relative;
 }
 

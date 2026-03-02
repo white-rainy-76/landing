@@ -212,6 +212,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -223,6 +227,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: #000000;
+  overflow-x: hidden;
+  /* Явно разрешаем вертикальный скролл касанием на iOS */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 #root {
