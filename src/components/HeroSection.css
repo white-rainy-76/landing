@@ -445,7 +445,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    animation: hero-text-color 12s ease-in 0.5s infinite;
+    animation: hero-text-color 10s ease-in 0.3s infinite;
     overflow: hidden;
   }
 
@@ -456,7 +456,7 @@
     width: 1613.5112390536365px;
     height: 1234.141241917964px;
 
-    animation: hero-ellipse-one-mobile 12s ease-out 1s infinite;
+    animation: hero-ellipse-one-mobile 10s ease-out 0.4s infinite;
   }
 
   .hero__ellipse--two {
@@ -466,7 +466,7 @@
     width: 1613.5112390536365px;
     height: 1234.141241917964px;
 
-    animation: hero-ellipse-two-mobile 12s ease-out 1s infinite;
+    animation: hero-ellipse-two-mobile 10s ease-out 0.4s infinite;
   }
 
   .hero__title {
