@@ -1,0 +1,260 @@
+.principle-card {
+  position: relative;
+  width: 448px;
+  min-height: 446px;
+  border-radius: 32.9px;
+  /* Это обрезает всё лишнее, создавая форму рамки */
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #000; /* Фон карточки, чтобы не было дырок */
+}
+
+/* Движущийся сегмент границы с градиентом на концах (35% периметра) */
+.principle-card::before {
+  content: "";
+  position: absolute;
+  /* Делаем квадрат, который заведомо больше прямоугольной карточки */
+  width: 150%;
+  height: 150%;
+  /* Центрируем его относительно карточки */
+  top: 50%;
+  left: 50%;
+
+  /* Расчет градиента для затухания:
+     Общая длина: 126 градусов (35% от 360).
+     Выделим центральную сплошную яркую часть, скажем, 88 градусов (70% длины).
+     Тогда на каждое затухание с обеих сторон останется по 19 градусов.
+     (126 - 88) / 2 = 19.
+  */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+
+    /* Инициализация прозрачности */ #00ff9f 19deg,
+    /* Начало затухания: переход от прозрачного к яркому */ #00ff9f 107deg,
+    /* Сплошная центральная яркая часть */ transparent 126deg,
+
+    /* Конец затухания: переход от яркого к прозрачному */ transparent 126deg,
+    /* Четкий конец сегмента */ transparent 360deg
+  );
+
+  /* Анимация теперь учитывает центрирование через translate */
+  /* Увеличили время до 8 секунд для плавного вращения */
+  animation: principle-card-border-spin 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* При hover — сплошная рамка поверх анимации (тот же цвет, без градиента) */
+.principle-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 32.9px;
+  padding: 3.29px;
+  background: #00ff9f;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.principle-card:hover::after {
+  opacity: 1;
+}
+
+@keyframes principle-card-border-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--strip-start, 0deg));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--strip-start, 0deg) + 360deg));
+  }
+}
+
+/* Внутренний блок: перекрывает центр, оставляя только узкую полоску по краям */
+.principle-card__inner {
+  position: absolute;
+  /* Толщина рамки регулируется этим отступом (inset) */
+  inset: 3.29px;
+  z-index: 2;
+  box-sizing: border-box;
+  border-radius: 29.61px;
+  background: #000;
+  padding: 20px;
+  padding-top: var(--card-padding-top, 42px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.principle-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.principle-card__title {
+  margin: 0;
+  margin-top: 25px;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 43.51px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+  vertical-align: middle;
+}
+
+.principle-card:first-of-type .principle-card__title {
+  margin-top: 25px;
+}
+
+.principle-card__description {
+  margin: 0;
+  margin-top: 26px;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 21.75px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+  vertical-align: middle;
+}
+
+.principle-card:first-of-type .principle-card__description {
+  margin-top: 26px;
+}
+
+/* Ноутбук (до 1440px): карточки меньше, чтобы три помещались в ряд */
+@media (max-width: 1440px) {
+  .principle-card {
+    width: 368px;
+    min-height: 366px;
+    border-radius: 27px;
+  }
+
+  .principle-card::before {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      #00ff9f 19deg,
+      #00ff9f 107deg,
+      transparent 126deg,
+      transparent 126deg,
+      transparent 360deg
+    );
+  }
+
+  .principle-card::after {
+    border-radius: 27px;
+    padding: 2.7px;
+  }
+
+  .principle-card__inner {
+    inset: 2.7px;
+    border-radius: 24.3px;
+    padding: 16px;
+    padding-top: 34px;
+  }
+
+  .principle-card__title {
+    margin-top: 18px;
+    font-size: 35px;
+  }
+
+  .principle-card:first-of-type .principle-card__title {
+    margin-top: 18px;
+  }
+
+  .principle-card__description {
+    margin-top: 18px;
+    font-size: 17.5px;
+  }
+
+  .principle-card:first-of-type .principle-card__description {
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .principle-card {
+    width: 186.18px;
+    min-height: 185.35px;
+    border-radius: 13.65px;
+  }
+
+  .principle-card::before {
+    background: conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      #00ff9f 19deg,
+      #00ff9f 107deg,
+      transparent 126deg,
+      transparent 126deg,
+      transparent 360deg
+    );
+  }
+
+  .principle-card::after {
+    border-radius: 13.65px;
+    padding: 1.1px;
+  }
+
+  .principle-card__inner {
+    inset: 1.1px;
+    border-radius: 12.29px;
+    padding: 15px;
+    padding-top: var(--card-padding-top-mobile, 15px);
+  }
+
+  .principle-card__icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .principle-card__title {
+    margin-top: 10px;
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .principle-card:first-of-type .principle-card__title {
+    margin-top: 10px;
+  }
+
+  .principle-card__description {
+    margin-top: 10px;
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 10px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .principle-card:first-of-type .principle-card__description {
+    margin-top: 10px;
+  }
+}

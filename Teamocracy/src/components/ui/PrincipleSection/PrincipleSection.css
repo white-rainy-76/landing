@@ -1,0 +1,96 @@
+.principle-section {
+  margin-top: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.principle-section__title {
+  margin-top: 10px;
+}
+
+.principle-section__subtitle {
+  margin-top: 10px;
+}
+
+.principle-section__badge-wrap {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.principle-section__cards {
+  margin-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 26.32px;
+}
+
+/* Ноутбук: меньше отступы, чтобы секция с карточками влезала на экран */
+@media (max-width: 1440px) {
+  .principle-section {
+    margin-top: 160px;
+  }
+
+  .principle-section__cards {
+    margin-top: 60px;
+    gap: 20px;
+  }
+}
+
+/* Телефон: отступы и размеры по макету */
+@media (max-width: 768px) {
+  .principle-section {
+    margin-top: 0;
+    padding: 0 15px;
+  }
+
+  .principle-section + .principle-section {
+    margin-top: 100px;
+  }
+
+  .principle-section__title {
+    margin-top: 3px;
+  }
+
+  .principle-section__subtitle {
+    margin-top: 3px;
+  }
+
+  .principle-section__badge-wrap {
+    margin-top: 9px;
+  }
+
+  .principle-section__cards {
+    margin-top: 30px;
+    gap: 11px;
+  }
+
+  /* Большой текст секции */
+  .principle-section .principle-section__title {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30.09px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Текст поменьше */
+  .principle-section .principle-section__subtitle {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+}

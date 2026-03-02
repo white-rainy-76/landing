@@ -1,0 +1,242 @@
+.section-eight {
+  margin-top: 234px;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+  box-sizing: border-box;
+  margin-bottom: 173px;
+  position: relative;
+}
+
+/* Фон секции — «летает сзади», его копия внутри стекла даёт рефракцию через filter */
+.section-eight__bg {
+  position: absolute;
+  inset: -100px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.section-eight__glass {
+  position: relative;
+  z-index: 1;
+  width: min(1500px, 92vw);
+  max-width: 100%;
+  height: 518px;
+}
+
+.section-eight__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 48px 39px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.section-eight__title {
+  margin: 0;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 90px;
+  line-height: 90%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+  vertical-align: middle;
+}
+
+/* Ноутбук (до 1540px): заголовок мельче, среднему тексту больше пространства */
+@media (max-width: 1560px) {
+  .section-eight__title {
+    font-size: 68px;
+    line-height: 1.05;
+  }
+
+  .section-eight__content {
+    padding: 56px 48px;
+  }
+
+  .section-eight__text {
+    max-width: 100%;
+    margin-top: 0.75em;
+    padding: 0 8px;
+  }
+}
+@media (max-width: 1224px) {
+  .section-eight__title {
+    font-size: 58px;
+  }
+}
+/* 1230px и ниже до мобилы: без эффекта стекла, только блок с контентом */
+@media (max-width: 1230px) {
+  .section-eight__glass {
+    width: min(907px, 92vw);
+    height: 716px;
+    min-height: 716px;
+  }
+
+  .section-eight__glass .liquid-glass-box__refraction {
+    display: none !important;
+    visibility: hidden !important;
+    filter: none !important;
+    -webkit-filter: none !important;
+  }
+
+  .section-eight__glass .liquid-glass-box__refraction,
+  .section-eight__glass .liquid-glass-box__refraction-bg {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 1224px) {
+  .section-eight__title {
+    font-size: 58px;
+  }
+}
+.section-eight__text {
+  margin: 0;
+  margin-top: 0.5em;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-align: center;
+  color: #36a179;
+  vertical-align: middle;
+  max-width: 1124px;
+}
+
+.section-eight__ctas {
+  margin-top: 27px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+.section-eight__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.section-eight__cta:hover {
+  opacity: 0.9;
+}
+
+.section-eight__cta-label {
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 22.75px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #ffffff;
+  vertical-align: middle;
+}
+
+.section-eight__cta-icon {
+  margin-top: 10px;
+}
+
+/* Телефон: все стили в конце файла, чтобы перекрыть базовые и планшетные */
+@media (max-width: 768px) {
+  .section-eight {
+    margin-top: 84px;
+    margin-bottom: 60px;
+  }
+
+  .section-eight__glass {
+    width: min(266px, 92vw);
+    min-height: 280px;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  .section-eight__glass .liquid-glass-box__refraction {
+    display: block;
+    visibility: visible;
+    filter: url(#static-glass-section8-mobile);
+    -webkit-filter: url(#static-glass-section8-mobile);
+  }
+
+  .section-eight__glass::before,
+  .section-eight__glass::after {
+    border-radius: 16px;
+  }
+
+  .section-eight__content {
+    padding: 22px 9px;
+    min-height: 280px;
+    height: auto;
+  }
+
+  .section-eight__title {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20.56px;
+    line-height: 90%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .section-eight__text {
+    margin-top: 10px;
+    font-family: "Gilroy", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .section-eight__ctas {
+    margin-top: 17px;
+    gap: 13px;
+  }
+
+  .section-eight__cta-icon {
+    margin-top: 3.5px;
+  }
+
+  .section-eight__cta-icon .cta-icon-box {
+    width: 22.97px;
+    height: 22.97px;
+  }
+
+  .section-eight__cta-label {
+    font-family: "Gilroy", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 10px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .section-eight__cta-icon .cta-icon-box svg {
+    width: 12px;
+    height: 12px;
+  }
+}

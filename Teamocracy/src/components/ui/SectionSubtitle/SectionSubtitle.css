@@ -1,0 +1,21 @@
+.section-subtitle {
+  font-family: "Gilroy", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #36a179;
+  margin: 0;
+  margin-top: 0.25em;
+}
+
+@media (max-width: 768px) {
+  .section-subtitle {
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+    vertical-align: middle;
+  }
+}

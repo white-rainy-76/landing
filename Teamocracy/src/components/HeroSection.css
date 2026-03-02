@@ -1,0 +1,558 @@
+/* Обёртка: занимает экран. Масштаб задаётся JS (чистое число) для scale(). */
+.hero-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000;
+}
+@media (min-width: 1921px) {
+  .hero {
+    transform: scale(var(--hero-scale, 1));
+  }
+}
+/* Hero: canvas 1920×1084; масштаб через transform (--hero-scale — число из JS). */
+.hero {
+  width: 1920px;
+  height: 1084px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  color: #00ff9f;
+  /* transform: scale(var(--hero-scale, 1)); */
+  transform-origin: center center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 24px;
+  padding-top: 120px;
+  animation: hero-text-color 12s ease-out 1s infinite;
+}
+
+/* Ноутбук (до 1540px): Hero адаптивный — 100% ширины, без scale */
+@media (max-width: 1540px) {
+  .hero-wrapper {
+    height: auto;
+    overflow: visible;
+  }
+
+  .hero {
+    width: 100%;
+    max-width: 1920px;
+    height: auto;
+    min-height: 100vh;
+    flex-shrink: 0;
+    transform: none;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .hero__ellipse--one {
+    top: 8%;
+    left: 108%;
+    animation: hero-ellipse-one-laptop 12s ease-out 1s infinite;
+  }
+
+  .hero__ellipse--two {
+    top: 45%;
+    left: -22%;
+    animation: hero-ellipse-two-laptop 12s ease-out 1s infinite;
+  }
+}
+
+/* Слой с эллипсами */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #000;
+}
+
+/* Обёртка заголовка и цитаты: на десктопе не влияет на вёрстку */
+.hero__content {
+  display: contents;
+}
+
+.hero__ellipse {
+  position: absolute;
+  width: 1613.51px;
+  height: 1234.14px;
+  border-radius: 50%;
+  background: rgba(0, 255, 159, 0.48);
+  filter: blur(122.2px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ellipse 1 — скорректированные значения */
+.hero__ellipse--one {
+  /* Начальная позиция = 0% keyframe, чтобы избежать CLS до старта анимации */
+  top: -678.77px;
+  left: 2102.97px;
+  animation: hero-ellipse-one 12s ease-out 1s infinite;
+}
+
+/* Ellipse 2 — Figma */
+.hero__ellipse--two {
+  /* Начальная позиция = 0% keyframe, чтобы избежать CLS до старта анимации */
+  top: -720px;
+  left: -2061.28px;
+  animation: hero-ellipse-two 12s ease-out 1s infinite;
+}
+
+@keyframes hero-title-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-quote-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__quote-reveal {
+  width: 100%;
+  height: 100%;
+  animation: hero-quote-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title {
+    animation: none;
+  }
+  .hero__quote-reveal {
+    animation: none;
+  }
+}
+
+.hero__title {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 237.282px;
+  line-height: 316px;
+  letter-spacing: -7.13631px;
+  text-align: center;
+  text-transform: uppercase;
+  color: currentColor;
+  margin: 0;
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+  /* Фиксированные размеры и позиция */
+  width: 1537px;
+  height: 316px;
+  top: 254px;
+  left: 191.5px;
+  transform: rotate(0deg);
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: hero-title-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+/* Ноутбук (до 1440px): надпись меньше, по центру */
+@media (max-width: 1540px) {
+  .hero__title {
+    font-size: 200px;
+    line-height: 1.15;
+    width: auto;
+    max-width: 92vw;
+    height: auto;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: -0.02em;
+  }
+}
+@media (max-width: 1400px) {
+  .hero__title {
+    font-size: 180px;
+  }
+}
+@media (max-width: 1200px) {
+  .hero__title {
+    font-size: 140px;
+  }
+}
+@media (max-width: 1000px) {
+  .hero__title {
+    font-size: 120px;
+  }
+}
+@media (max-width: 800px) {
+  .hero__title {
+    font-size: 100px;
+  }
+}
+.hero__quote-wrap {
+  /* Frame 26 — Figma: 378×201, left 1279.5, top 651 */
+  margin-top: 0;
+  width: 378px;
+  height: 201px;
+  position: absolute;
+  left: 1279.5px;
+  top: 651px;
+  z-index: 2;
+}
+
+.hero__quote-glass {
+  width: 378px;
+  min-width: 378px;
+  height: 100%;
+}
+
+.hero__quote-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero__quote-text {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+@media (max-width: 1540px) {
+  .hero__quote-wrap {
+    position: absolute;
+    top: auto;
+    bottom: 10%;
+    transform: translateX(-80%);
+    width: 378px;
+    height: 201px;
+  }
+  .hero__ellipse {
+    filter: blur(142.2px);
+  }
+  .hero__quote-glass {
+    width: 378px;
+    min-width: 378px;
+    height: 100%;
+  }
+}
+@media (max-width: 1400px) {
+  .hero__quote-wrap {
+    top: 50%;
+    transform: translateX(-120%);
+  }
+}
+@media (max-width: 1230px) {
+  .hero__quote-wrap {
+    top: 50%;
+    transform: translateX(-170%);
+  }
+}
+@media (max-width: 1000px) {
+  .hero__quote-wrap {
+    top: 50%;
+    transform: translateX(-220%);
+  }
+}
+@media (max-width: 830px) {
+  .hero__quote-wrap {
+    top: 50%;
+    transform: translateX(-270%);
+  }
+}
+
+@keyframes hero-ellipse-one {
+  0% {
+    top: -168.77px;
+    left: 2102.97px;
+  }
+  33.333% {
+    left: 980.97px;
+    top: -457.77px;
+  }
+  66.666% {
+    top: -1888.77px;
+    left: 212.97px;
+  }
+  100% {
+    top: -168.77px;
+    left: 2102.97px;
+  }
+}
+
+@keyframes hero-ellipse-two {
+  0% {
+    top: -720px;
+    left: -2061.28px;
+  }
+  33.333% {
+    left: -530.28px;
+    top: 261px;
+  }
+  66.666% {
+    top: 2070px;
+    left: -131.28px;
+  }
+  100% {
+    top: -720px;
+    left: -2061.28px;
+  }
+}
+
+/* Ноутбук: эллипсы ближе к центру (в %), не уезжают далеко за край */
+@keyframes hero-ellipse-one-laptop {
+  0% {
+    top: 8%;
+    left: 108%;
+  }
+  33.333% {
+    left: 42%;
+    top: -18%;
+  }
+  66.666% {
+    top: -55%;
+    left: -18%;
+  }
+  100% {
+    top: 8%;
+    left: 108%;
+  }
+}
+
+@keyframes hero-ellipse-two-laptop {
+  0% {
+    top: 45%;
+    left: -22%;
+  }
+  33.333% {
+    left: 22%;
+    top: 22%;
+  }
+  66.666% {
+    top: 105%;
+    left: 52%;
+  }
+  100% {
+    top: 45%;
+    left: -22%;
+  }
+}
+
+@keyframes hero-text-color {
+  0% {
+    color: #00ff9f;
+  }
+  33.333% {
+    color: #000000;
+  }
+  66.666% {
+    color: #00ff9f;
+  }
+  100% {
+    color: #00ff9f;
+  }
+}
+
+/* Мобила: эллипсы — только позиции (без width, height, opacity) */
+@keyframes hero-ellipse-one-mobile {
+  0% {
+    top: -368.77px;
+    left: 1202.97px;
+    transform: rotate(-35.59deg);
+  }
+  33.333% {
+    top: -555.57px;
+    left: -81.54px;
+    transform: rotate(-35.59deg);
+  }
+  66.666% {
+    top: -1888.77px;
+    left: 212.97px;
+    transform: rotate(-35.59deg);
+  }
+  100% {
+    top: -168.77px;
+    left: 2102.97px;
+    transform: rotate(-35.59deg);
+  }
+}
+
+@keyframes hero-ellipse-two-mobile {
+  0% {
+    top: -120px;
+    left: -2061.28px;
+    transform: rotate(-35.59deg);
+  }
+  33.333% {
+    top: 879.85px;
+    left: -1138.5px;
+    transform: rotate(-35.59deg);
+  }
+  66.666% {
+    top: 1270px;
+    left: -331.28px;
+    transform: rotate(-35.59deg);
+  }
+  100% {
+    top: -120px;
+    left: -2461.28px;
+    transform: rotate(-35.59deg);
+  }
+}
+
+/* Mobile — hero на весь экран, скейл отключён */
+@media (max-width: 768px) {
+  .hero-wrapper {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    --hero-scale: 1;
+  }
+
+  .hero {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    transform: none;
+    padding: 25px;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    animation: hero-text-color 12s ease-in 0.5s infinite;
+    overflow: hidden;
+  }
+
+  .hero__ellipse--one {
+    top: -168.77px;
+    left: 2102.97px;
+
+    width: 1613.5112390536365px;
+    height: 1234.141241917964px;
+
+    animation: hero-ellipse-one-mobile 12s ease-out 1s infinite;
+  }
+
+  .hero__ellipse--two {
+    top: -720px;
+    left: -2061.28px;
+
+    width: 1613.5112390536365px;
+    height: 1234.141241917964px;
+
+    animation: hero-ellipse-two-mobile 12s ease-out 1s infinite;
+  }
+
+  .hero__title {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 40px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: currentColor;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    height: auto;
+    top: auto;
+    left: auto;
+    transform: none;
+    display: block;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__quote-wrap {
+    margin-top: 26px;
+    align-self: flex-end;
+    position: relative;
+    width: 195px;
+    min-width: 195px;
+    height: 104px;
+    top: auto;
+    left: auto;
+    transform: none;
+  }
+
+  .hero__quote-glass {
+    width: 195px;
+    min-width: 195px;
+    height: 104px;
+    border-radius: 10.34px;
+  }
+
+  .hero__quote-glass .liquid-glass-box__refraction {
+    filter: url(#static-glass-hero-mobile);
+    -webkit-filter: url(#static-glass-hero-mobile);
+  }
+
+  .hero__quote-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .hero__quote-text {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14.48px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    margin: 0;
+    color: #ffffff;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 25px;
+  }
+
+  .hero__title {
+    font-size: 40px;
+  }
+
+  .hero__quote-text {
+    font-size: 14.48px;
+  }
+}

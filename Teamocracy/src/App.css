@@ -1,0 +1,145 @@
+.landing {
+  background: #000000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Неоновая полоска прогресса скролла */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 9999;
+  background: rgba(0, 255, 159, 0.12);
+  pointer-events: none;
+}
+
+.scroll-progress__fill {
+  height: 100%;
+  background: #00ff9f;
+  box-shadow:
+    0 0 10px #00ff9f,
+    0 0 20px rgba(0, 255, 159, 0.6);
+  transition: width 0.12s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress__fill {
+    transition: none;
+  }
+}
+
+/* Эллипс внизу сайта — на всю ширину, эллипс ходит от края до края */
+.bottom-ellipse-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 800px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Слой блюра — один в один как .hero__blur, размывает эллипс и фон под треком */
+.bottom-ellipse-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.bottom-ellipse {
+  position: absolute;
+  bottom: -150px;
+  left: 0;
+  width: 791px;
+  height: 473px;
+  border-radius: 50%;
+  background: rgba(0, 255, 159, 0.48);
+  filter: blur(122.2px);
+  animation: bottom-ellipse-move 15.1s linear infinite;
+  animation-delay: 800ms;
+}
+
+/*
+  Движение от левого края трека до правого (трек на всю ширину).
+  Тайминги: 800ms задержка, 4s в центр, 800ms пауза, 4s вправо, 1500ms пауза, 4s обратно.
+*/
+@keyframes bottom-ellipse-move {
+  0% {
+    left: 0;
+  }
+  5.3% {
+    left: 0;
+  }
+  31.79% {
+    left: calc(50% - 395.5px);
+  }
+  37.09% {
+    left: calc(50% - 395.5px);
+  }
+  63.58% {
+    left: calc(100% - 791px);
+  }
+  73.51% {
+    left: calc(100% - 791px);
+  }
+  100% {
+    left: 0;
+  }
+}
+
+/* Мобила: эллипс меньше, движение по низу экрана, виден */
+@media (max-width: 768px) {
+  .bottom-ellipse-track {
+    min-height: 420px;
+    bottom: -45px;
+  }
+  .bottom-ellipse-blur {
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+  }
+  .bottom-ellipse {
+    width: 295.37px;
+    height: 142.84px;
+    bottom: -10px;
+    filter: blur(40px);
+    animation: bottom-ellipse-move-mobile 15.1s linear infinite;
+    animation-delay: 800ms;
+  }
+}
+
+@keyframes bottom-ellipse-move-mobile {
+  /* Трек на всю ширину, эллипс от левого края до правого */
+  0% {
+    left: 0;
+  }
+  5.3% {
+    left: 0;
+  }
+  31.79% {
+    left: calc(50% - 147.685px);
+  }
+  37.09% {
+    left: calc(50% - 147.685px);
+  }
+  63.58% {
+    left: calc(100% - 295.37px);
+  }
+  73.51% {
+    left: calc(100% - 295.37px);
+  }
+  100% {
+    left: 0;
+  }
+}

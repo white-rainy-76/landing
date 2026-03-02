@@ -1,0 +1,74 @@
+/* Контейнер стекла — визуал как в секции 8 */
+.liquid-glass-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--liquid-glass-radius, 24px);
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  /* border: 1px solid rgba(255, 255, 255, 0.05); */
+}
+
+/* Блик на фаске */
+.liquid-glass-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Слой рефракции — к нему применяется filter (не backdrop!) */
+.liquid-glass-box__refraction {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.liquid-glass-box__refraction-bg {
+  position: absolute;
+  inset: -100px;
+  width: calc(100% + 200px);
+  height: calc(100% + 200px);
+}
+
+/* Шум */
+.liquid-glass-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  filter: url(#glass-noise);
+  opacity: 0.015;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Контент поверх стекла */
+.liquid-glass-box__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
