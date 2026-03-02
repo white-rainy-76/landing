@@ -237,6 +237,12 @@
     padding-bottom: 80px;
   }
 
+  .section-three .section-subtitle {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .section-three__visual {
     height: 277px;
     margin-top: 17px;

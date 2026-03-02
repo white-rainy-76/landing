@@ -20,7 +20,7 @@ export default function SectionTwo() {
       </SectionTitle>
       <SectionSubtitle
         className={inView ? "reveal in-view" : "reveal"}
-        styles={{ maxWidth: "240px", transitionDelay: inView ? "0.1s" : undefined }}
+        styles={{ transitionDelay: inView ? "0.1s" : undefined }}
       >
         Командрократичні команди здатні на більше, бо:
       </SectionSubtitle>

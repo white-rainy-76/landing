@@ -84,6 +84,12 @@
     margin-top: 78px;
   }
 
+  .section-two .section-subtitle {
+    max-width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .section-two__list {
     margin-top: 19px;
     gap: 4px;

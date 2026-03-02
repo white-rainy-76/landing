@@ -15,7 +15,6 @@ const SectionThree: React.FC = () => {
       <SectionSubtitle
         className={viewClass}
         styles={{
-          maxWidth: "300px",
           transitionDelay: inView ? "0.08s" : undefined,
         }}
       >
