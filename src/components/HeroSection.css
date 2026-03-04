@@ -228,7 +228,7 @@
 
 .hero__quote-text {
   margin: 0;
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: "Gilroy", system-ui, sans-serif;
   font-weight: 400;
   font-size: 28px;
   line-height: 1.35;
@@ -421,7 +421,7 @@
   }
 
   .hero__title {
-    font-family: "Segoe UI", system-ui, sans-serif;
+    font-family: "Gilroy", system-ui, sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: 40px;
@@ -484,7 +484,7 @@
   }
 
   .hero__quote-text {
-    font-family: "Segoe UI", system-ui, sans-serif;
+    font-family: "Gilroy", system-ui, sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 14.48px;
