@@ -3,15 +3,15 @@ import "./PrincipleCard.css";
 type PrincipleCardProps = {
   icon: React.ReactNode;
   title: React.ReactNode;
-  /** Рядок (переноси по крапці) або JSX (наприклад з <br />) */
+  /** Description text: plain string (split by ". ") or JSX */
   description: React.ReactNode;
-  /** Кастомний padding-top для картки (наприклад "42px" або 42) */
+  /** Optional custom padding-top for the card ("42px" or 42) */
   paddingTop?: string | number;
-  /** Padding-top для картки на мобільному (у пікселях), застосовується в @media (max-width: 768px) */
+  /** Optional padding-top on mobile (px), used in @media (max-width: 768px) */
   paddingTopMobile?: number;
-  /** Відступ між заголовком і описом (наприклад "26px" або 26), за замовчуванням 26px */
+  /** Optional gap between title and description ("26px" or 26), defaults to 26px */
   descriptionMarginTop?: string | number;
-  /** Початковий кут полоски анімації в градусах (0–360), щоб картки трохи відрізнялись */
+  /** Initial angle of the animated strip in degrees (0–360) so cards differ slightly */
   stripStartDeg?: number;
 };
 

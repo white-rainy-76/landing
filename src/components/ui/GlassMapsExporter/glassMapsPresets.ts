@@ -2,9 +2,9 @@ import type { GlassFilterConfig } from "../../../utils/liquidGlass";
 import type { GlassExportPreset } from "./GlassMapsExporter";
 
 /**
- * Пресеты для экспорта карт стекла.
- * Меняй размеры и конфиг здесь — в dev внизу страницы появятся кнопки Export.
- * Сохраняй скачанные PNG в public/images/ (glass-displacement-{name}.png, glass-specular-{name}.png).
+ * Presets used to export glass maps.
+ * Tune sizes and config here — in dev you'll see Export buttons for each preset.
+ * Save the generated PNGs to public/images/ as glass-displacement-{name}.png and glass-specular-{name}.png.
  */
 export const GLASS_MAPS_PRESETS: GlassExportPreset[] = [
   {
@@ -39,7 +39,7 @@ export const GLASS_MAPS_PRESETS: GlassExportPreset[] = [
       surfaceKey: "convex_squircle",
     } as Partial<GlassFilterConfig>,
   },
-  /** Hero: 378×201, borderRadius 20 — экспортируй и сохрани в public/images/ как glass-displacement-hero.png, glass-specular-hero.png */
+  /** Hero: 378×201, borderRadius 20 — export and save as glass-displacement-hero.png / glass-specular-hero.png in public/images/ */
   {
     name: "hero",
     width: 378,
@@ -56,7 +56,7 @@ export const GLASS_MAPS_PRESETS: GlassExportPreset[] = [
       surfaceKey: "convex_squircle",
     } as Partial<GlassFilterConfig>,
   },
-  /** Hero mobile: 195×104 — экспортируй и сохрани как glass-displacement-hero-mobile.png, glass-specular-hero-mobile.png */
+  /** Hero mobile: 195×104 — export as glass-displacement-hero-mobile.png / glass-specular-hero-mobile.png */
   {
     name: "hero-mobile",
     width: 195,
@@ -89,7 +89,7 @@ export const GLASS_MAPS_PRESETS: GlassExportPreset[] = [
       surfaceKey: "convex_squircle",
     } as Partial<GlassFilterConfig>,
   },
-  /** Секция 8: 907×716 — с 1230px до мобилы. Экспорт → glass-displacement-section8-1230.png, glass-specular-section8-1230.png */
+  /** Section 8: 907×716 (1230px down to mobile). Export as glass-displacement-section8-1230.png / glass-specular-section8-1230.png */
   {
     name: "section8-1230",
     width: 907,
@@ -108,11 +108,11 @@ export const GLASS_MAPS_PRESETS: GlassExportPreset[] = [
   },
 ];
 
-/** Пресет hero для фильтра: те же размеры и конфиг, что при экспорте. Используется в static-glass-hero. */
+/** Hero preset for the SVG filter: same size/config as exported maps, used by static-glass-hero */
 export const HERO_GLASS_PRESET: GlassExportPreset = GLASS_MAPS_PRESETS.find(
   (p) => p.name === "hero",
 )!;
 
-/** Пресет hero mobile (195×104) для фильтра static-glass-hero-mobile. */
+/** Hero mobile preset (195×104) for static-glass-hero-mobile filter */
 export const HERO_MOBILE_GLASS_PRESET: GlassExportPreset =
   GLASS_MAPS_PRESETS.find((p) => p.name === "hero-mobile")!;

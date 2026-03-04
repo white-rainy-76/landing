@@ -10,24 +10,23 @@ function downloadDataUrl(filename: string, dataUrl: string) {
 }
 
 export interface GlassExportPreset {
-  /** Подпись на кнопке и суффикс в имени файла (например "desktop" → glass-displacement-desktop.png). */
+  /** Label for the button and suffix in filenames (e.g. "desktop" → glass-displacement-desktop.png) */
   name: string;
   width: number;
   height: number;
-  /** Опциональный конфиг стекла (radius, bezel и т.д.). */
+  /** Optional glass config (radius, bezel, etc.) */
   config?: Partial<GlassFilterConfig>;
 }
 
 export interface GlassMapsExporterProps {
-  /** Список пресетов: для каждого будет кнопка "Export {name} (width×height)". */
+  /** Presets to export; each becomes a button "Export {name} (width×height)" */
   presets: GlassExportPreset[];
   className?: string;
 }
 
 /**
- * Компонент для однократного экспорта карт смещения и блика в PNG.
- * Рендерится только в dev (import.meta.env.DEV).
- * Подключи в нужном месте, когда нужно сгенерировать/обновить карты для статичного стекла.
+ * Helper component to export displacement/specular maps to PNG.
+ * Renders only in dev (import.meta.env.DEV) when you need to regenerate static glass maps.
  */
 export default function GlassMapsExporter({
   presets,

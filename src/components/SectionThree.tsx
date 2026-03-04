@@ -23,7 +23,7 @@ const SectionThree: React.FC = () => {
       </SectionSubtitle>
 
       <div className="section-three__visual">
-        {/* Общий контейнер для линии, который идет за всеми точками */}
+        {/* Shared container for the vertical line behind all nodes */}
         <div className="section-three__main-line">
           <div className="section-three__main-pulse"></div>
         </div>

@@ -30,7 +30,7 @@
   width: 100%;
 }
 
-/* Эффект при наведении */
+/* Hover interaction */
 .section-two__list-item:hover .section-two__num {
   color: #00ff9f;
   text-shadow: 0 0 21.7px #00ff9f7d;

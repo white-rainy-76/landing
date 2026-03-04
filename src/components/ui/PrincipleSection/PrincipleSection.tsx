@@ -9,30 +9,30 @@ import { useInView } from "../../../hooks/useInView";
 export type PrincipleSectionCard = {
   icon: React.ReactNode;
   title: React.ReactNode;
-  /** Рядок (переноси по крапці) або JSX (наприклад з <br />) */
+  /** Description text: plain string (with optional \n) or JSX */
   description: React.ReactNode;
-  /** Опційно: кастомний padding-top для картки ("42px" або 42) */
+  /** Optional custom padding-top for the card ("42px" or 42) */
   paddingTop?: string | number;
-  /** Опційно: padding-top для картки на мобільному (у пікселях) */
+  /** Optional padding-top on mobile (in pixels) */
   paddingTopMobile?: number;
-  /** Опційно: відступ між заголовком і описом ("26px" або 26) */
+  /** Optional gap between title and description ("26px" or 26) */
   descriptionMarginTop?: string | number;
-  /** Опційно: початковий кут полоски анімації (0–360) */
+  /** Optional initial angle for the animated strip (0–360) */
   stripStartDeg?: number;
 };
 
 export type PrincipleSectionProps = {
-  /** Текст верхнього бейджа (наприклад "Принцип 01") */
+  /** Text in the top badge (e.g. "Principle 01") */
   topBadge: React.ReactNode;
-  /** Заголовок секції */
+  /** Section title */
   title: React.ReactNode;
-  /** Підзаголовок під заголовком (можна передати JSX з <br /> або рядок з \n для переносу) */
+  /** Subtitle under the title (JSX with <br /> or string with \n) */
   subtitle: React.ReactNode;
-  /** Текст центрального бейджа */
+  /** Text in the center badge */
   centerBadge: React.ReactNode;
-  /** Масив з 3 карток: icon, title, description */
+  /** Array of three cards: icon, title, description */
   cards: PrincipleSectionCard[];
-  /** Додатковий className для секції */
+  /** Optional extra className for the section */
   className?: string;
 };
 

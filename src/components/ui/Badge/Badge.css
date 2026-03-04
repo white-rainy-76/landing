@@ -42,8 +42,8 @@
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 
-  pointer-events: none; /* Чтобы рамка не мешала кликам */
-  z-index: -1; /* Уводим под текст, но над фоном родителя */
+  pointer-events: none; /* Border should not capture clicks */
+  z-index: -1; /* Under the text, above the parent background */
 }
 
 @media (max-width: 768px) {

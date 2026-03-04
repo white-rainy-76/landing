@@ -5,7 +5,7 @@
   align-items: center;
   background: #000;
   padding-bottom: 100px;
-  --section-three-cycle: 9s; /* Ускорил для динамики, можно вернуть 9s */
+  --section-three-cycle: 9s; /* Animation cycle duration */
   --green: #00ff9f;
   --green-bright: #39ffb4;
 }
@@ -15,14 +15,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Важно для позиционирования общей линии */
+  position: relative; /* Needed for positioning the main vertical line */
 }
 
-/* --- ЕДИНАЯ ЛИНИЯ --- */
+/* --- MAIN VERTICAL LINE --- */
 .section-three__main-line {
   position: absolute;
-  top: 16px; /* Начало в центре первой точки */
-  bottom: 16px; /* Конец в центре последней точки */
+  top: 16px; /* Starts near the first node */
+  bottom: 16px; /* Ends near the last node */
   width: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -73,7 +73,7 @@
   }
 }
 
-/* --- УЗЛЫ И ТОЧКИ --- */
+/* --- NODES AND DOTS --- */
 .section-three__node {
   height: 38px;
   display: flex;
@@ -115,13 +115,13 @@
   z-index: 1;
 }
 
-/* --- СТАТИЧНЫЕ ПУТИ (теперь просто распорки) --- */
+/* --- STATIC CONNECTORS (visual only) --- */
 .section-three__path {
   width: 6px;
   height: 352px;
 }
 
-/* --- СИНХРОНИЗАЦИЯ СВЕЧЕНИЯ ТОЧЕК --- */
+/* --- DOT GLOW TIMING --- */
 .node-1 .section-three__dot-glow {
   animation: glow-cycle var(--section-three-cycle) infinite;
   animation-delay: 0s;
@@ -140,13 +140,11 @@
     opacity: 0;
     transform: scale(1);
   }
-  /* Пик свечения: наступает быстро */
   15%,
   30% {
     opacity: 1;
     transform: scale(1.5);
   }
-  /* К 50% анимации точки она уже должна полностью потухнуть */
   50%,
   100% {
     opacity: 0;
@@ -154,7 +152,7 @@
   }
 }
 
-/* --- ТЕКСТ И ШРИФТЫ --- */
+/* --- TEXT AND TYPOGRAPHY --- */
 .section-three__text {
   font-family: "Gilroy", sans-serif;
   font-weight: 600;
@@ -174,7 +172,7 @@
   text-align: left;
 }
 
-/* Подсветка текста при прохождении градиента */
+/* Text glow while the gradient passes a node */
 .node-1 .section-three__text {
   animation: text-glow var(--section-three-cycle) infinite;
   animation-delay: 0s;
@@ -202,7 +200,7 @@
   }
 }
 
-/* --- ОСТАЛЬНЫЕ БЛОКИ --- */
+/* --- REMAINING CONTENT BLOCKS --- */
 .section-three__block {
   margin-top: 90px;
   display: flex;

@@ -7,15 +7,50 @@
     <title>Teamocracy — нова культура командної взаємодії</title>
     <!-- Open Graph / Social sharing -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Teamocracy — нова культура командної взаємодії" />
-    <meta property="og:description" content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам." />
-    <meta property="og:image" content="/og-image.png" />
-    <meta name="description" content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам." />
+    <meta
+      property="og:title"
+      content="Teamocracy — нова культура командної взаємодії"
+    />
+    <meta
+      property="og:description"
+      content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам."
+    />
+    <meta
+      name="description"
+      content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам."
+    />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Teamocracy — нова культура командної взаємодії" />
-    <meta name="twitter:description" content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам." />
+    <meta
+      name="twitter:title"
+      content="Teamocracy — нова культура командної взаємодії"
+    />
+    <meta
+      name="twitter:description"
+      content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам."
+    />
     <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Google Analytics 4 -->
+    <!-- Replace G-XXXXXXXXXX with your GA4 Measurement ID -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      // Skip tracking on localhost/dev
+      if (
+        location.hostname !== "localhost" &&
+        location.hostname !== "127.0.0.1"
+      ) {
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXXXXX", { anonymize_ip: true });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

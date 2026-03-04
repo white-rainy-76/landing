@@ -30,7 +30,7 @@
   gap: 26.32px;
 }
 
-/* Ноутбук: меньше отступы, чтобы секция с карточками влезала на экран */
+/* Laptop: smaller margins so the card grid fits on screen */
 @media (max-width: 1440px) {
   .principle-section {
     margin-top: 160px;
@@ -42,7 +42,7 @@
   }
 }
 
-/* Телефон: отступы и размеры по макету */
+/* Mobile: spacing and sizes follow the design spec */
 @media (max-width: 768px) {
   .principle-section {
     margin-top: 0;
@@ -70,7 +70,6 @@
     gap: 11px;
   }
 
-  /* Большой текст секции */
   .principle-section .principle-section__title {
     font-family: "Gilroy", sans-serif;
     font-weight: 500;
@@ -82,7 +81,6 @@
     vertical-align: middle;
   }
 
-  /* Текст поменьше */
   .principle-section .principle-section__subtitle {
     font-family: "Gilroy", sans-serif;
     font-weight: 500;

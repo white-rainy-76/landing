@@ -1,4 +1,4 @@
-/* Обёртка: занимает экран. Масштаб задаётся JS (чистое число) для scale(). */
+/* Hero wrapper covers the viewport; scale is driven from JS */
 .hero-wrapper {
   width: 100vw;
   height: 100vh;
@@ -13,7 +13,7 @@
     transform: scale(var(--hero-scale, 1));
   }
 }
-/* Hero: canvas 1920×1084; масштаб через transform (--hero-scale — число из JS). */
+/* Hero canvas 1920×1084; transform scale uses --hero-scale from JS */
 .hero {
   width: 1920px;
   height: 1084px;
@@ -33,7 +33,7 @@
   animation: hero-text-color 12s ease-out 1s infinite;
 }
 
-/* Ноутбук (до 1540px): Hero адаптивный — 100% ширины, без scale */
+/* Laptop (up to 1540px): fluid hero, 100% width without scaling */
 @media (max-width: 1540px) {
   .hero-wrapper {
     height: auto;
@@ -64,7 +64,7 @@
   }
 }
 
-/* Слой с эллипсами */
+/* Layer with blurred ellipses */
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -72,7 +72,7 @@
   background: #000;
 }
 
-/* Обёртка заголовка и цитаты: на десктопе не влияет на вёрстку */
+/* Wrapper for title and quote (no layout impact on desktop) */
 .hero__content {
   display: contents;
 }
@@ -88,17 +88,15 @@
   z-index: 0;
 }
 
-/* Ellipse 1 — скорректированные значения */
+/* Ellipse 1 position */
 .hero__ellipse--one {
-  /* Начальная позиция = 0% keyframe, чтобы избежать CLS до старта анимации */
   top: -678.77px;
   left: 2102.97px;
   animation: hero-ellipse-one 12s ease-out 1s infinite;
 }
 
-/* Ellipse 2 — Figma */
+/* Ellipse 2 position from design */
 .hero__ellipse--two {
-  /* Начальная позиция = 0% keyframe, чтобы избежать CLS до старта анимации */
   top: -720px;
   left: -2061.28px;
   animation: hero-ellipse-two 12s ease-out 1s infinite;
@@ -142,7 +140,7 @@
 }
 
 .hero__title {
-  font-family: "Segoe UI", system-ui, sans-serif;
+  font-family: "Gilroy", system-ui, sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: 237.282px;
@@ -155,7 +153,6 @@
   position: absolute;
   z-index: 2;
   box-sizing: border-box;
-  /* Фиксированные размеры и позиция */
   width: 1537px;
   height: 316px;
   top: 254px;
@@ -168,7 +165,6 @@
   animation: hero-title-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
-/* Ноутбук (до 1440px): надпись меньше, по центру */
 @media (max-width: 1540px) {
   .hero__title {
     font-size: 200px;
@@ -203,7 +199,6 @@
   }
 }
 .hero__quote-wrap {
-  /* Frame 26 — Figma: 378×201, left 1279.5, top 651 */
   margin-top: 0;
   width: 378px;
   height: 201px;
@@ -322,7 +317,6 @@
   }
 }
 
-/* Ноутбук: эллипсы ближе к центру (в %), не уезжают далеко за край */
 @keyframes hero-ellipse-one-laptop {
   0% {
     top: 8%;
@@ -376,7 +370,6 @@
   }
 }
 
-/* Мобила: эллипсы — только позиции (без width, height, opacity) */
 @keyframes hero-ellipse-one-mobile {
   0% {
     top: -368.77px;
@@ -423,7 +416,7 @@
   }
 }
 
-/* Mobile — hero на весь экран, скейл отключён. 100dvh = видимая высота на iOS (без бага 100vh). */
+/* Mobile — hero */
 @media (max-width: 768px) {
   .hero-wrapper {
     height: 100vh;

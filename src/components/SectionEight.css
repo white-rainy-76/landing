@@ -8,7 +8,7 @@
   position: relative;
 }
 
-/* Фон секции — «летает сзади», его копия внутри стекла даёт рефракцию через filter */
+/* Background of the section; a copy inside the glass is used for refraction */
 .section-eight__bg {
   position: absolute;
   inset: -100px;
@@ -50,7 +50,7 @@
   vertical-align: middle;
 }
 
-/* Ноутбук (до 1540px): заголовок мельче, среднему тексту больше пространства */
+/* Laptop (up to 1540px): smaller title, more space for body text */
 @media (max-width: 1560px) {
   .section-eight__title {
     font-size: 68px;
@@ -72,7 +72,7 @@
     font-size: 58px;
   }
 }
-/* 1230px и ниже до мобилы: без эффекта стекла, только блок с контентом */
+/* 1230px and below: turn off glass effect, keep only content block */
 @media (max-width: 1230px) {
   .section-eight__glass {
     width: min(907px, 92vw);
@@ -155,7 +155,7 @@
   margin-top: 10px;
 }
 
-/* Телефон: все стили в конце файла, чтобы перекрыть базовые и планшетные */
+/* Mobile: overrides come last to win over desktop and tablet styles */
 @media (max-width: 768px) {
   .section-eight {
     margin-top: 84px;

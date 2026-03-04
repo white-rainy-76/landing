@@ -3,6 +3,7 @@ import LiquidGlassBox from "./ui/LiquidGlassBox/LiquidGlassBox";
 import CtaIconBox from "./ui/CtaIconBox/CtaIconBox";
 import { IconCta1, IconCta2 } from "./ui/CtaIconBox/CtaIcons";
 import { getScaleForConfig } from "../utils/liquidGlass";
+import { trackEvent } from "../utils/analytics";
 import {
   HERO_GLASS_PRESET,
   HERO_MOBILE_GLASS_PRESET,
@@ -12,12 +13,12 @@ const GLASS_WIDTH = 1500;
 const GLASS_HEIGHT = 518;
 const GLASS_SCALE = 52;
 
-/** Планшет (1224px): высота 718px, свои PNG-карты */
+/** Tablet (≈1224px): height 718px, dedicated PNG maps */
 const GLASS_WIDTH_TABLET = 1500;
 const GLASS_HEIGHT_TABLET = 718;
 const GLASS_SCALE_TABLET = 52;
 
-/** 1230px и ниже до мобилы: 907×716, свои PNG-карты */
+/** 1230px down to mobile: 907×716, dedicated PNG maps */
 const GLASS_WIDTH_1230 = 907;
 const GLASS_HEIGHT_1230 = 716;
 const GLASS_SCALE_1230 = 52;
@@ -26,7 +27,7 @@ const GLASS_WIDTH_MOBILE = 378;
 const GLASS_HEIGHT_MOBILE = 201;
 const GLASS_SCALE_MOBILE = 48;
 
-/** Шум для стекла — один раз в документе, используется LiquidGlassBox. */
+/** Single SVG noise filter for all glass elements, used by LiquidGlassBox */
 function GlassNoiseOverlay() {
   return (
     <svg aria-hidden style={{ position: "absolute", width: 0, height: 0 }}>
@@ -45,7 +46,7 @@ function GlassNoiseOverlay() {
   );
 }
 
-/** Статичный SVG-фильтр стекла: feImage на готовые PNG в public/images/. */
+/** Static SVG glass filters that use pre-generated PNG maps from public/images/ */
 function StaticGlassFilterDefs() {
   return (
     <svg
@@ -113,7 +114,7 @@ function StaticGlassFilterDefs() {
           />
           <feBlend in="spec_faded" in2="with_sat" mode="normal" />
         </filter>
-        {/* Планшет (1224px): карты 1500×718 — границы стекла на всю высоту 718px */}
+        {/* Tablet (1224px): maps 1500×718, glass fills full height */}
         <filter
           id="static-glass-section8-tablet"
           x="0%"
@@ -173,7 +174,7 @@ function StaticGlassFilterDefs() {
           />
           <feBlend in="spec_faded" in2="with_sat" mode="normal" />
         </filter>
-        {/* 1230px и ниже до мобилы: карты 907×716 */}
+        {/* 1230px down to mobile: maps 907×716 */}
         <filter
           id="static-glass-section8-1230"
           x="0%"
@@ -292,7 +293,7 @@ function StaticGlassFilterDefs() {
           />
           <feBlend in="spec_faded" in2="with_sat" mode="normal" />
         </filter>
-        {/* Hero: карты из GlassMapsExporter — Export hero, сохрани в public/images/ как glass-displacement-hero.png, glass-specular-hero.png */}
+        {/* Hero: uses maps exported via GlassMapsExporter (glass-displacement-hero.png / glass-specular-hero.png) */}
         <filter id="static-glass-hero" x="0%" y="0%" width="100%" height="100%">
           <feGaussianBlur
             in="SourceGraphic"
@@ -346,7 +347,7 @@ function StaticGlassFilterDefs() {
           />
           <feBlend in="spec_faded" in2="with_sat" mode="normal" />
         </filter>
-        {/* Hero mobile: 195×104 — карты glass-displacement-hero-mobile.png, glass-specular-hero-mobile.png */}
+        {/* Hero mobile: 195×104 — maps glass-displacement-hero-mobile.png / glass-specular-hero-mobile.png */}
         <filter
           id="static-glass-hero-mobile"
           x="0%"
@@ -443,6 +444,9 @@ export default function SectionEight() {
               target="_blank"
               rel="noopener noreferrer"
               className="section-eight__cta"
+              onClick={() =>
+                trackEvent("cta_click", { location: "footer", channel: "telegram" })
+              }
             >
               <span className="section-eight__cta-label">
                 Cлідкуй
@@ -460,6 +464,9 @@ export default function SectionEight() {
               target="_blank"
               rel="noopener noreferrer"
               className="section-eight__cta"
+              onClick={() =>
+                trackEvent("cta_click", { location: "footer", channel: "threads" })
+              }
             >
               <span className="section-eight__cta-label">
                 Долучитись

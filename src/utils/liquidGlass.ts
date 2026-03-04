@@ -1,7 +1,7 @@
 /**
- * Liquid Glass — подход из конструктора с physics-based refraction.
- * Настройки задаются через конфиг, фильтр пересобирается при изменении размеров/конфига.
- * SVG backdrop-filter поддерживается в Chrome/Chromium.
+ * Liquid glass utilities for physics‑inspired refraction.
+ * Config controls the glass shape; filters are rebuilt when size/config changes.
+ * SVG filters work in modern Chromium‑based browsers.
  */
 
 const SURFACE_FNS: Record<string, (x: number) => number> = {
@@ -240,27 +240,27 @@ function generateSpecularMap(
 }
 
 export interface GlassFilterConfig {
-  /** Радиус скругления (px) */
+  /** Corner radius in px */
   borderRadius: number;
-  /** Толщина стекла */
+  /** Glass thickness */
   glassThickness: number;
-  /** Ширина фаски (bezel) */
+  /** Bezel width */
   bezelWidth: number;
-  /** Показатель преломления */
+  /** Index of refraction */
   refractiveIndex: number;
-  /** Множитель масштаба смещения */
+  /** Multiplier for displacement scale */
   scaleRatio: number;
-  /** Размытие фона */
+  /** Background blur strength */
   blurAmount: number;
-  /** Непрозрачность блика */
+  /** Specular highlight opacity */
   specularOpacity: number;
-  /** Насыщенность после смещения */
+  /** Saturation after displacement */
   specularSaturation: number;
-  /** Профиль поверхности: convex_squircle | lip */
+  /** Surface profile key: convex_squircle | lip */
   surfaceKey?: keyof typeof SURFACE_FNS;
-  /** ID фильтра в SVG (уникальный при нескольких стеклах на странице) */
+  /** SVG filter id (unique when multiple glasses are on the page) */
   filterId?: string;
-  /** Понижение разрешения карт смещения/блика (0.25–1). Меньше = быстрее, чуть менее чётко. */
+  /** Downscale factor for maps (0.25–1): lower = faster, slightly softer */
   mapScaleDown?: number;
 }
 
@@ -279,8 +279,8 @@ export const DEFAULT_GLASS_CONFIG: GlassFilterConfig = {
 const FILTER_ID = "liquid-glass-filter";
 
 /**
- * Собирает SVG-фильтр для эффекта стекла и возвращает разметку для вставки в <defs>.
- * Размеры w/h — размеры элемента в пикселях (для карт смещения и блика).
+ * Builds an SVG filter for the glass effect and returns markup for <defs>.
+ * Width/height are element dimensions in pixels (used for displacement/specular maps).
  */
 export function buildGlassFilter(
   config: Partial<GlassFilterConfig> & { width: number; height: number }

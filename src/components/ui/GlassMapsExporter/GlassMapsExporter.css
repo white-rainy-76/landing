@@ -5,7 +5,7 @@
   padding: 8px 0;
 }
 
-/* Поверх всего в dev — фиксированный блок в углу */
+/* Dev‑only panel fixed in the corner */
 .glass-maps-exporter-app {
   position: fixed !important;
   top: 12px;

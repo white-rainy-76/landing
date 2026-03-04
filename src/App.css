@@ -5,11 +5,11 @@
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  /* Скролл — у document (body), не у контейнера: так на iOS не ломается прокрутка */
+  /* Scrolling stays on the document, not this container (avoids iOS scroll bugs) */
   position: relative;
 }
 
-/* Неоновая полоска прогресса скролла */
+/* Neon scroll progress bar */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -71,10 +71,7 @@
   animation-delay: 800ms;
 }
 
-/*
-  Движение от левого края трека до правого (трек на всю ширину).
-  Тайминги: 800ms задержка, 4s в центр, 800ms пауза, 4s вправо, 1500ms пауза, 4s обратно.
-*/
+/* Movement of the bottom ellipse along the full-width track */
 @keyframes bottom-ellipse-move {
   0% {
     left: 0;
@@ -99,7 +96,7 @@
   }
 }
 
-/* Мобила: эллипс меньше, движение по низу экрана, виден */
+/* Mobile: smaller ellipse, visible near the bottom edge */
 @media (max-width: 768px) {
   .bottom-ellipse-track {
     min-height: 420px;
@@ -120,7 +117,7 @@
 }
 
 @keyframes bottom-ellipse-move-mobile {
-  /* Трек на всю ширину, эллипс от левого края до правого */
+  /* Full-width track: ellipse travels from left to right edge */
   0% {
     left: 0;
   }

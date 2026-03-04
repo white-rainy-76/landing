@@ -2,24 +2,21 @@ import type { ReactNode } from "react";
 import "./LiquidGlassBox.css";
 
 export interface LiquidGlassBoxProps {
-  /** ID SVG-фильтра стекла (например #static-glass-section8) */
+  /** id of the SVG glass filter (for example "static-glass-section8") */
   filterId: string;
-  /** Контент поверх стекла */
+  /** Content rendered on top of the glass */
   children: ReactNode;
-  /** Содержимое слоя рефракции (копия фона). По умолчанию пустой div. */
+  /** Optional background content used for refraction */
   refractionContent?: ReactNode;
-  /** Дополнительный класс для контейнера стекла */
+  /** Extra class name for the outer container */
   className?: string;
-  /** Класс для обёртки контента */
+  /** Extra class name for the content wrapper */
   contentClassName?: string;
-  /** Скругление углов (px). По умолчанию 24. */
+  /** Corner radius in px (defaults to 24) */
   borderRadius?: number;
 }
 
-/**
- * Стеклянный блок на основе секции 8: слой рефракции с filter (без backdrop-filter),
- * поверх контент. Требует в документе SVG с filter id={filterId} и #glass-noise для шума.
- */
+/** Wrapper that applies an SVG‑based glass effect around its children */
 export default function LiquidGlassBox({
   filterId,
   children,

@@ -36,20 +36,20 @@ export default function HeroSection() {
           <h1 className="hero__title">TEAMOCRACY</h1>
           <div className="hero__quote-wrap">
             <div className="hero__quote-reveal">
-            <LiquidGlassBox
-              className="hero__quote-glass"
-              filterId="static-glass-hero"
-              borderRadius={20}
-              contentClassName="hero__quote-content"
-            >
-              <p className="hero__quote-text">
-                Команда — це більше,
-                <br />
-                ніж сума навичок.
-                <br />
-                Це культура.
-              </p>
-            </LiquidGlassBox>
+              <LiquidGlassBox
+                className="hero__quote-glass"
+                filterId="static-glass-hero"
+                borderRadius={20}
+                contentClassName="hero__quote-content"
+              >
+                <p className="hero__quote-text">
+                  Команда — це більше,
+                  <br />
+                  ніж сума навичок.
+                  <br />
+                  Це культура.
+                </p>
+              </LiquidGlassBox>
             </div>
           </div>
         </div>

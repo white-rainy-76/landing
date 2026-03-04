@@ -3,49 +3,37 @@
   width: 448px;
   min-height: 446px;
   border-radius: 32.9px;
-  /* Это обрезает всё лишнее, создавая форму рамки */
   overflow: hidden;
   box-sizing: border-box;
-  background: #000; /* Фон карточки, чтобы не было дырок */
+  background: #000;
 }
 
-/* Движущийся сегмент границы с градиентом на концах (35% периметра) */
+/* Animated border segment with gradient ends (about 35% of the perimeter) */
 .principle-card::before {
   content: "";
   position: absolute;
-  /* Делаем квадрат, который заведомо больше прямоугольной карточки */
   width: 150%;
   height: 150%;
-  /* Центрируем его относительно карточки */
   top: 50%;
   left: 50%;
 
-  /* Расчет градиента для затухания:
-     Общая длина: 126 градусов (35% от 360).
-     Выделим центральную сплошную яркую часть, скажем, 88 градусов (70% длины).
-     Тогда на каждое затухание с обеих сторон останется по 19 градусов.
-     (126 - 88) / 2 = 19.
-  */
   background: conic-gradient(
     from 0deg,
     transparent 0deg,
 
-    /* Инициализация прозрачности */ #00ff9f 19deg,
-    /* Начало затухания: переход от прозрачного к яркому */ #00ff9f 107deg,
-    /* Сплошная центральная яркая часть */ transparent 126deg,
-
-    /* Конец затухания: переход от яркого к прозрачному */ transparent 126deg,
-    /* Четкий конец сегмента */ transparent 360deg
+    #00ff9f 19deg,
+    #00ff9f 107deg,
+    transparent 126deg,
+    transparent 126deg,
+    transparent 360deg
   );
 
-  /* Анимация теперь учитывает центрирование через translate */
-  /* Увеличили время до 8 секунд для плавного вращения */
   animation: principle-card-border-spin 8s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
 
-/* При hover — сплошная рамка поверх анимации (тот же цвет, без градиента) */
+/* Solid border on hover above the animated strip */
 .principle-card::after {
   content: "";
   position: absolute;
@@ -83,7 +71,6 @@
 /* Внутренний блок: перекрывает центр, оставляя только узкую полоску по краям */
 .principle-card__inner {
   position: absolute;
-  /* Толщина рамки регулируется этим отступом (inset) */
   inset: 3.29px;
   z-index: 2;
   box-sizing: border-box;
