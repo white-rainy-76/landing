@@ -22,10 +22,19 @@ function App() {
       const max = scrollHeight - clientHeight;
       setScrollProgress(max <= 0 ? 0 : Math.min(1, scrollTop / max));
     };
-    const rafId = requestAnimationFrame(() => onScroll());
-    window.addEventListener("scroll", onScroll, { passive: true });
+    let cancelled = false;
+    const runAfterLoad = () => {
+      if (cancelled) return;
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    };
+    if (document.readyState === "complete") {
+      requestAnimationFrame(() => runAfterLoad());
+    } else {
+      window.addEventListener("load", () => requestAnimationFrame(() => runAfterLoad()));
+    }
     return () => {
-      cancelAnimationFrame(rafId);
+      cancelled = true;
       window.removeEventListener("scroll", onScroll);
     };
   }, []);

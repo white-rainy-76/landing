@@ -19,6 +19,20 @@
       type="font/woff2"
       crossorigin
     />
+    <link
+      rel="preload"
+      href="/font/Gilroy-Medium.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/font/Gilroy-Semibold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>Teamocracy — нова культура командної взаємодії</title>
     <!-- Open Graph / Social sharing (Facebook, LinkedIn, Telegram, WhatsApp, etc.) -->
     <meta property="og:type" content="website" />
@@ -51,7 +65,7 @@
     />
     <meta name="twitter:image" content="https://www.teamocracy.org/Og_image.jpg" />
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) — init after load to avoid blocking LCP -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-946PV8K2LM"
@@ -62,8 +76,15 @@
         dataLayer.push(arguments);
       }
       window.gtag = gtag;
-      gtag("js", new Date());
-      gtag("config", "G-946PV8K2LM", { anonymize_ip: true });
+      function initGtag() {
+        gtag("js", new Date());
+        gtag("config", "G-946PV8K2LM", { anonymize_ip: true });
+      }
+      if (document.readyState === "complete") {
+        initGtag();
+      } else {
+        window.addEventListener("load", initGtag);
+      }
     </script>
   </head>
   <body>
