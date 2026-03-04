@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import "./SectionEight.css";
 import LiquidGlassBox from "./ui/LiquidGlassBox/LiquidGlassBox";
 import CtaIconBox from "./ui/CtaIconBox/CtaIconBox";
@@ -413,6 +414,25 @@ function StaticGlassFilterDefs() {
 }
 
 export default function SectionEight() {
+  const ctasRef = useRef<HTMLDivElement>(null);
+  const sentViewRef = useRef(false);
+
+  useEffect(() => {
+    const el = ctasRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry?.isIntersecting || sentViewRef.current) return;
+        sentViewRef.current = true;
+        trackEvent("cta_section_view", { location: "footer" });
+      },
+      { threshold: 0.25, rootMargin: "0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="section-eight">
       <StaticGlassFilterDefs />
@@ -438,15 +458,19 @@ export default function SectionEight() {
             <br />
             співпрацювати командам.
           </p>
-          <div className="section-eight__ctas">
+          <div ref={ctasRef} className="section-eight__ctas">
             <a
               href="https://t.me/teamocracy_org"
               target="_blank"
               rel="noopener noreferrer"
               className="section-eight__cta"
-              onClick={() =>
-                trackEvent("cta_click", { location: "footer", channel: "telegram" })
-              }
+              onClick={() => {
+                trackEvent("cta_click", {
+                  location: "footer",
+                  channel: "telegram",
+                  link_url: "https://t.me/teamocracy_org",
+                });
+              }}
             >
               <span className="section-eight__cta-label">
                 Cлідкуй
@@ -464,9 +488,13 @@ export default function SectionEight() {
               target="_blank"
               rel="noopener noreferrer"
               className="section-eight__cta"
-              onClick={() =>
-                trackEvent("cta_click", { location: "footer", channel: "threads" })
-              }
+              onClick={() => {
+                trackEvent("cta_click", {
+                  location: "footer",
+                  channel: "threads",
+                  link_url: "https://www.threads.com/@teamocracy_org",
+                });
+              }}
             >
               <span className="section-eight__cta-label">
                 Долучитись
