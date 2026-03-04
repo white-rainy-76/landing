@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preload critical fonts to reduce CLS and speed up LCP -->
+    <link
+      rel="preload"
+      href="/font/Gilroy-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/font/Gilroy-Bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>Teamocracy — нова культура командної взаємодії</title>
     <!-- Open Graph / Social sharing -->
     <meta property="og:type" content="website" />
@@ -15,6 +30,7 @@
       property="og:description"
       content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам."
     />
+    <meta property="og:image" content="/Og_image.jpg" />
     <meta
       name="description"
       content="Teamocracy — це нова культура командної взаємодії. Принципи, що дозволяють краще співпрацювати командам."

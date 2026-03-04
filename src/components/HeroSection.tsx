@@ -1,26 +1,9 @@
-import { useLayoutEffect, useState } from "react";
 import "./HeroSection.css";
 import LiquidGlassBox from "./ui/LiquidGlassBox/LiquidGlassBox";
 
 export default function HeroSection() {
-  const [scale, setScale] = useState(1);
-
-  useLayoutEffect(() => {
-    const updateScale = () => {
-      const newScale = window.innerWidth / 1920;
-      setScale(window.innerWidth > 1920 ? newScale : 1);
-    };
-
-    window.addEventListener("resize", updateScale);
-    updateScale();
-    return () => window.removeEventListener("resize", updateScale);
-  }, []);
-
   return (
-    <div
-      className="hero-wrapper"
-      style={{ "--hero-scale": scale } as React.CSSProperties}
-    >
+    <div className="hero-wrapper">
       <section className="hero">
         <div className="hero__bg" aria-hidden="true">
           <div

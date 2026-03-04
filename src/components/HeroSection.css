@@ -10,7 +10,7 @@
 }
 @media (min-width: 1921px) {
   .hero {
-    transform: scale(var(--hero-scale, 1));
+    transform: scale(calc(100vw / 1920));
   }
 }
 /* Hero canvas 1920×1084; transform scale uses --hero-scale from JS */
@@ -52,24 +52,23 @@
   }
 
   .hero__ellipse--one {
-    top: 8%;
-    left: 108%;
+    transform: translate(108%, 8%);
     animation: hero-ellipse-one-laptop 12s ease-out 1s infinite;
   }
 
   .hero__ellipse--two {
-    top: 45%;
-    left: -22%;
+    transform: translate(-22%, 45%);
     animation: hero-ellipse-two-laptop 12s ease-out 1s infinite;
   }
 }
 
-/* Layer with blurred ellipses */
+/* Layer with blurred ellipses — contain to prevent CLS */
 .hero__bg {
   position: absolute;
   inset: 0;
   z-index: 0;
   background: #000;
+  contain: layout style paint;
 }
 
 /* Wrapper for title and quote (no layout impact on desktop) */
@@ -79,6 +78,8 @@
 
 .hero__ellipse {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 1613.51px;
   height: 1234.14px;
   border-radius: 50%;
@@ -86,19 +87,18 @@
   filter: blur(122.2px);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
 }
 
-/* Ellipse 1 position */
+/* Ellipse 1 position — use transform to avoid layout reflow */
 .hero__ellipse--one {
-  top: -678.77px;
-  left: 2102.97px;
+  transform: translate(2102.97px, -678.77px);
   animation: hero-ellipse-one 12s ease-out 1s infinite;
 }
 
-/* Ellipse 2 position from design */
+/* Ellipse 2 position — use transform to avoid layout reflow */
 .hero__ellipse--two {
-  top: -720px;
-  left: -2061.28px;
+  transform: translate(-2061.28px, -720px);
   animation: hero-ellipse-two 12s ease-out 1s infinite;
 }
 
@@ -281,77 +281,61 @@
 
 @keyframes hero-ellipse-one {
   0% {
-    top: -168.77px;
-    left: 2102.97px;
+    transform: translate(2102.97px, -168.77px);
   }
   33.333% {
-    left: 980.97px;
-    top: -457.77px;
+    transform: translate(980.97px, -457.77px);
   }
   66.666% {
-    top: -1888.77px;
-    left: 212.97px;
+    transform: translate(212.97px, -1888.77px);
   }
   100% {
-    top: -168.77px;
-    left: 2102.97px;
+    transform: translate(2102.97px, -168.77px);
   }
 }
 
 @keyframes hero-ellipse-two {
   0% {
-    top: -720px;
-    left: -2061.28px;
+    transform: translate(-2061.28px, -720px);
   }
   33.333% {
-    left: -530.28px;
-    top: 261px;
+    transform: translate(-530.28px, 261px);
   }
   66.666% {
-    top: 2070px;
-    left: -131.28px;
+    transform: translate(-131.28px, 2070px);
   }
   100% {
-    top: -720px;
-    left: -2061.28px;
+    transform: translate(-2061.28px, -720px);
   }
 }
 
 @keyframes hero-ellipse-one-laptop {
   0% {
-    top: 8%;
-    left: 108%;
+    transform: translate(108%, 8%);
   }
   33.333% {
-    left: 42%;
-    top: -18%;
+    transform: translate(42%, -18%);
   }
   66.666% {
-    top: -55%;
-    left: -18%;
+    transform: translate(-18%, -55%);
   }
   100% {
-    top: 8%;
-    left: 108%;
+    transform: translate(108%, 8%);
   }
 }
 
 @keyframes hero-ellipse-two-laptop {
   0% {
-    top: 45%;
-    left: -22%;
+    transform: translate(-22%, 45%);
   }
   33.333% {
-    left: 22%;
-    top: 22%;
+    transform: translate(22%, 22%);
   }
   66.666% {
-    top: 105%;
-    left: 52%;
+    transform: translate(52%, 105%);
   }
   100% {
-    top: 45%;
-    left: -22%;
+    transform: translate(-22%, 45%);
   }
 }
 
@@ -372,47 +356,31 @@
 
 @keyframes hero-ellipse-one-mobile {
   0% {
-    top: -368.77px;
-    left: 1202.97px;
-    transform: rotate(-35.59deg);
+    transform: translate(1202.97px, -368.77px);
   }
   33.333% {
-    top: -555.57px;
-    left: -81.54px;
-    transform: rotate(-35.59deg);
+    transform: translate(-81.54px, -555.57px);
   }
   66.666% {
-    top: -1888.77px;
-    left: 212.97px;
-    transform: rotate(-35.59deg);
+    transform: translate(212.97px, -1888.77px);
   }
   100% {
-    top: -168.77px;
-    left: 2102.97px;
-    transform: rotate(-35.59deg);
+    transform: translate(2102.97px, -168.77px);
   }
 }
 
 @keyframes hero-ellipse-two-mobile {
   0% {
-    top: -120px;
-    left: -2061.28px;
-    transform: rotate(-35.59deg);
+    transform: translate(-2061.28px, -120px);
   }
   33.333% {
-    top: 879.85px;
-    left: -1138.5px;
-    transform: rotate(-35.59deg);
+    transform: translate(-1138.5px, 879.85px);
   }
   66.666% {
-    top: 1270px;
-    left: -331.28px;
-    transform: rotate(-35.59deg);
+    transform: translate(-331.28px, 1270px);
   }
   100% {
-    top: -120px;
-    left: -2461.28px;
-    transform: rotate(-35.59deg);
+    transform: translate(-2461.28px, -120px);
   }
 }
 
@@ -426,13 +394,13 @@
     overflow: hidden;
     align-items: center;
     justify-content: center;
-    --hero-scale: 1;
   }
 
   .hero {
     width: 100%;
     min-height: 100vh;
-    height: auto;
+    height: 100vh;
+    height: 100dvh;
     transform: none;
     padding: 25px;
     align-items: center;
@@ -443,22 +411,12 @@
   }
 
   .hero__ellipse--one {
-    top: -168.77px;
-    left: 2102.97px;
-
-    width: 1613.5112390536365px;
-    height: 1234.141241917964px;
-
+    transform: translate(1202.97px, -368.77px);
     animation: hero-ellipse-one-mobile 10s ease-out 0.4s infinite;
   }
 
   .hero__ellipse--two {
-    top: -720px;
-    left: -2061.28px;
-
-    width: 1613.5112390536365px;
-    height: 1234.141241917964px;
-
+    transform: translate(-2061.28px, -120px);
     animation: hero-ellipse-two-mobile 10s ease-out 0.4s infinite;
   }
 

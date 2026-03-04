@@ -22,9 +22,12 @@ function App() {
       const max = scrollHeight - clientHeight;
       setScrollProgress(max <= 0 ? 0 : Math.min(1, scrollTop / max));
     };
-    onScroll();
+    const rafId = requestAnimationFrame(() => onScroll());
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
