@@ -1,4 +1,6 @@
-/* Hero wrapper covers the viewport; scale is driven from JS */
+/* --------------------------------------------------------------------------
+   Wrapper & container
+   -------------------------------------------------------------------------- */
 .hero-wrapper {
   width: 100vw;
   height: 100vh;
@@ -8,22 +10,17 @@
   overflow: hidden;
   background: #000;
 }
-@media (min-width: 1921px) {
-  .hero {
-    transform: scale(calc(100vw / 1920));
-  }
-}
-/* Hero canvas 1920×1084; transform scale uses --hero-scale from JS */
+
 .hero {
-  width: 1920px;
-  height: 1084px;
+  width: 100%;
+  max-width: 1920px;
+  height: 100vh;
+  min-height: 100vh;
   flex-shrink: 0;
   position: relative;
   overflow: hidden;
   background: #000;
   color: #00ff9f;
-  /* transform: scale(var(--hero-scale, 1)); */
-  transform-origin: center center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,36 +30,9 @@
   animation: hero-text-color 12s ease-out 1s infinite;
 }
 
-/* Laptop (up to 1540px): fluid hero, 100% width without scaling */
-@media (max-width: 1540px) {
-  .hero-wrapper {
-    height: auto;
-    overflow: visible;
-  }
-
-  .hero {
-    width: 100%;
-    max-width: 1920px;
-    height: auto;
-    min-height: 100vh;
-    flex-shrink: 0;
-    transform: none;
-    padding-top: 80px;
-    padding-bottom: 60px;
-  }
-
-  .hero__ellipse--one {
-    transform: translate(108%, 8%);
-    animation: hero-ellipse-one-laptop 12s ease-out 1s infinite;
-  }
-
-  .hero__ellipse--two {
-    transform: translate(-22%, 45%);
-    animation: hero-ellipse-two-laptop 12s ease-out 1s infinite;
-  }
-}
-
-/* Layer with blurred ellipses — contain to prevent CLS */
+/* --------------------------------------------------------------------------
+   Background & ellipses
+   -------------------------------------------------------------------------- */
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -71,17 +41,14 @@
   contain: layout style paint;
 }
 
-/* Wrapper for title and quote (no layout impact on desktop) */
-.hero__content {
-  display: contents;
-}
-
 .hero__ellipse {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1613.51px;
-  height: 1234.14px;
+  width: 84%;
+  height: 114%;
+  max-width: 1614px;
+  max-height: 1234px;
   border-radius: 50%;
   background: rgba(0, 255, 159, 0.48);
   filter: blur(122.2px);
@@ -90,62 +57,33 @@
   will-change: transform;
 }
 
-/* Ellipse 1 position — use transform to avoid layout reflow */
 .hero__ellipse--one {
-  transform: translate(2102.97px, -678.77px);
+  transform: translate(109.5%, -62.6%);
   animation: hero-ellipse-one 12s ease-out 1s infinite;
 }
 
-/* Ellipse 2 position — use transform to avoid layout reflow */
 .hero__ellipse--two {
-  transform: translate(-2061.28px, -720px);
+  transform: translate(-107.4%, -66.4%);
   animation: hero-ellipse-two 12s ease-out 1s infinite;
 }
 
-@keyframes hero-title-in {
-  from {
-    opacity: 0;
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0);
-  }
+/* --------------------------------------------------------------------------
+   Content wrapper
+   -------------------------------------------------------------------------- */
+.hero__content {
+  display: contents;
 }
 
-@keyframes hero-quote-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero__quote-reveal {
-  width: 100%;
-  height: 100%;
-  animation: hero-quote-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero__title {
-    animation: none;
-  }
-  .hero__quote-reveal {
-    animation: none;
-  }
-}
-
+/* --------------------------------------------------------------------------
+   Title
+   -------------------------------------------------------------------------- */
 .hero__title {
   font-family: "Gilroy", system-ui, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 237.282px;
-  line-height: 316px;
-  letter-spacing: -7.13631px;
+  font-size: clamp(60px, 12.4vw, 237px);
+  line-height: 1.33;
+  letter-spacing: -0.03em;
   text-align: center;
   text-transform: uppercase;
   color: currentColor;
@@ -153,64 +91,40 @@
   position: absolute;
   z-index: 2;
   box-sizing: border-box;
-  width: 1537px;
-  height: 316px;
-  top: 254px;
-  left: 191.5px;
-  transform: rotate(0deg);
-  opacity: 1;
+  width: 80%;
+  max-width: 1537px;
+  top: 23.4%;
+  left: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
   animation: hero-title-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
-@media (max-width: 1540px) {
-  .hero__title {
-    font-size: 200px;
-    line-height: 1.15;
-    width: auto;
-    max-width: 92vw;
-    height: auto;
-    top: 38%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    letter-spacing: -0.02em;
-  }
+/* --------------------------------------------------------------------------
+   Quote block
+   -------------------------------------------------------------------------- */
+.hero__quote-reveal {
+  width: 100%;
+  height: 100%;
+  animation: hero-quote-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
 }
-@media (max-width: 1400px) {
-  .hero__title {
-    font-size: 180px;
-  }
-}
-@media (max-width: 1200px) {
-  .hero__title {
-    font-size: 140px;
-  }
-}
-@media (max-width: 1000px) {
-  .hero__title {
-    font-size: 120px;
-  }
-}
-@media (max-width: 800px) {
-  .hero__title {
-    font-size: 100px;
-  }
-}
+
 .hero__quote-wrap {
   margin-top: 0;
-  width: 378px;
-  height: 201px;
+  width: 19.7%;
+  min-width: 280px;
+  max-width: 378px;
+  aspect-ratio: 378 / 201;
   position: absolute;
-  left: 1279.5px;
-  top: 651px;
+  left: 66.6%;
+  top: 60%;
   z-index: 2;
 }
 
 .hero__quote-glass {
-  width: 378px;
-  min-width: 378px;
+  width: 100%;
+  min-width: 280px;
   height: 100%;
 }
 
@@ -236,155 +150,134 @@
   color: #ffffff;
 }
 
+/* ==========================================================================
+   Media queries — breakpoints from largest to smallest
+   ========================================================================== */
+
+/* Laptop */
 @media (max-width: 1540px) {
-  .hero__quote-wrap {
-    position: absolute;
-    top: auto;
-    bottom: 10%;
-    transform: translateX(-80%);
-    width: 378px;
-    height: 201px;
+  .hero-wrapper {
+    height: auto;
+    overflow: visible;
   }
+
+  .hero {
+    width: 100%;
+    max-width: 1920px;
+    height: auto;
+    min-height: 100vh;
+    transform: none;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
   .hero__ellipse {
+    width: 1613.51px;
+    height: 1234.14px;
+    max-width: none;
+    max-height: none;
     filter: blur(142.2px);
   }
+
+  .hero__ellipse--one {
+    transform: translate(109.5%, -15.6%);
+    animation: hero-ellipse-one-laptop 12s ease-out 1s infinite;
+  }
+
+  .hero__ellipse--two {
+    transform: translate(-107.4%, -66.4%);
+    animation: hero-ellipse-two-laptop 12s ease-out 1s infinite;
+  }
+
+  .hero__title {
+    font-size: 200px;
+    line-height: 1.15;
+    width: auto;
+    max-width: 92vw;
+    height: auto;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    letter-spacing: -0.02em;
+  }
+
+  /* Контент у потоці: цитата завжди 80px під заголовком, 10px від правого краю надписи */
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    max-width: 92vw;
+    margin: 0 auto;
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .hero__quote-wrap {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    margin-top: 80px;
+    align-self: flex-end;
+    margin-right: 10px;
+    transform: none;
+    width: 378px;
+    min-width: unset;
+    max-width: none;
+    height: 201px;
+    aspect-ratio: unset;
+  }
+
   .hero__quote-glass {
     width: 378px;
     min-width: 378px;
     height: 100%;
   }
 }
+
 @media (max-width: 1400px) {
-  .hero__quote-wrap {
-    top: 50%;
-    transform: translateX(-120%);
+  .hero__title {
+    font-size: 180px;
   }
 }
-@media (max-width: 1230px) {
-  .hero__quote-wrap {
-    top: 50%;
-    transform: translateX(-170%);
+
+@media (max-width: 1200px) {
+  .hero__title {
+    font-size: 140px;
   }
 }
+
+/* 1100px: еліпси — лівий менше вправо, правий сильніше вліво */
+@media (max-width: 1100px) {
+  .hero__ellipse--one {
+    transform: translate(70%, -15.6%);
+    animation: hero-ellipse-one-narrow 12s ease-out 1s infinite;
+  }
+
+  .hero__ellipse--two {
+    transform: translate(-120%, -66.4%);
+    animation: hero-ellipse-two-narrow 12s ease-out 1s infinite;
+  }
+}
+
 @media (max-width: 1000px) {
-  .hero__quote-wrap {
-    top: 50%;
-    transform: translateX(-220%);
-  }
-}
-@media (max-width: 830px) {
-  .hero__quote-wrap {
-    top: 50%;
-    transform: translateX(-270%);
+  .hero__title {
+    font-size: 120px;
   }
 }
 
-@keyframes hero-ellipse-one {
-  0% {
-    transform: translate(2102.97px, -168.77px);
-  }
-  33.333% {
-    transform: translate(980.97px, -457.77px);
-  }
-  66.666% {
-    transform: translate(212.97px, -1888.77px);
-  }
-  100% {
-    transform: translate(2102.97px, -168.77px);
+@media (max-width: 800px) {
+  .hero__title {
+    font-size: 100px;
   }
 }
 
-@keyframes hero-ellipse-two {
-  0% {
-    transform: translate(-2061.28px, -720px);
-  }
-  33.333% {
-    transform: translate(-530.28px, 261px);
-  }
-  66.666% {
-    transform: translate(-131.28px, 2070px);
-  }
-  100% {
-    transform: translate(-2061.28px, -720px);
-  }
-}
-
-@keyframes hero-ellipse-one-laptop {
-  0% {
-    transform: translate(108%, 8%);
-  }
-  33.333% {
-    transform: translate(42%, -18%);
-  }
-  66.666% {
-    transform: translate(-18%, -55%);
-  }
-  100% {
-    transform: translate(108%, 8%);
-  }
-}
-
-@keyframes hero-ellipse-two-laptop {
-  0% {
-    transform: translate(-22%, 45%);
-  }
-  33.333% {
-    transform: translate(22%, 22%);
-  }
-  66.666% {
-    transform: translate(52%, 105%);
-  }
-  100% {
-    transform: translate(-22%, 45%);
-  }
-}
-
-@keyframes hero-text-color {
-  0% {
-    color: #00ff9f;
-  }
-  33.333% {
-    color: #000000;
-  }
-  66.666% {
-    color: #00ff9f;
-  }
-  100% {
-    color: #00ff9f;
-  }
-}
-
-@keyframes hero-ellipse-one-mobile {
-  0% {
-    transform: translate(1202.97px, -368.77px);
-  }
-  33.333% {
-    transform: translate(-81.54px, -555.57px);
-  }
-  66.666% {
-    transform: translate(212.97px, -1888.77px);
-  }
-  100% {
-    transform: translate(2102.97px, -168.77px);
-  }
-}
-
-@keyframes hero-ellipse-two-mobile {
-  0% {
-    transform: translate(-2061.28px, -120px);
-  }
-  33.333% {
-    transform: translate(-1138.5px, 879.85px);
-  }
-  66.666% {
-    transform: translate(-331.28px, 1270px);
-  }
-  100% {
-    transform: translate(-2461.28px, -120px);
-  }
-}
-
-/* Mobile — hero */
+/* Mobile — повернуто як було до fluid-рефактору */
 @media (max-width: 768px) {
   .hero-wrapper {
     height: 100vh;
@@ -403,6 +296,8 @@
     height: 100dvh;
     transform: none;
     padding: 25px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -410,13 +305,21 @@
     overflow: hidden;
   }
 
+  .hero__ellipse {
+    width: 1613.51px;
+    height: 1234.14px;
+    max-width: none;
+    max-height: none;
+    filter: blur(122.2px);
+  }
+
   .hero__ellipse--one {
-    transform: translate(1202.97px, -368.77px);
+    transform: translate(74.6%, -29.9%);
     animation: hero-ellipse-one-mobile 10s ease-out 0.4s infinite;
   }
 
   .hero__ellipse--two {
-    transform: translate(-2061.28px, -120px);
+    transform: translate(-127.8%, -9.7%);
     animation: hero-ellipse-two-mobile 10s ease-out 0.4s infinite;
   }
 
@@ -439,6 +342,7 @@
     left: auto;
     transform: none;
     display: block;
+    animation: none;
   }
 
   .hero__content {
@@ -449,7 +353,14 @@
     max-width: 100%;
     margin: 0 auto;
     position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     z-index: 2;
+  }
+
+  .hero__quote-reveal {
+    animation: hero-quote-in 1s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
   }
 
   .hero__quote-wrap {
@@ -458,10 +369,12 @@
     position: relative;
     width: 195px;
     min-width: 195px;
+    max-width: none;
     height: 104px;
     top: auto;
     left: auto;
     transform: none;
+    aspect-ratio: unset;
   }
 
   .hero__quote-glass {
@@ -507,5 +420,182 @@
 
   .hero__quote-text {
     font-size: 14.48px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero__title {
+    animation: none;
+  }
+
+  .hero__quote-reveal {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
+@keyframes hero-title-in {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-quote-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-text-color {
+  0% {
+    color: #00ff9f;
+  }
+  33.333% {
+    color: #000000;
+  }
+  66.666% {
+    color: #00ff9f;
+  }
+  100% {
+    color: #00ff9f;
+  }
+}
+
+/* Desktop ellipses (fluid %) */
+@keyframes hero-ellipse-one {
+  0% {
+    transform: translate(109.5%, -15.6%);
+  }
+  33.333% {
+    transform: translate(51.1%, -42.2%);
+  }
+  66.666% {
+    transform: translate(11.1%, -174.2%);
+  }
+  100% {
+    transform: translate(109.5%, -15.6%);
+  }
+}
+
+@keyframes hero-ellipse-two {
+  0% {
+    transform: translate(-107.4%, -66.4%);
+  }
+  33.333% {
+    transform: translate(-27.6%, 24.1%);
+  }
+  66.666% {
+    transform: translate(-6.8%, 191%);
+  }
+  100% {
+    transform: translate(-107.4%, -66.4%);
+  }
+}
+
+/* Laptop ellipses — той самий шлях що на desktop (1920), у % від розміру еліпса */
+@keyframes hero-ellipse-one-laptop {
+  0% {
+    transform: translate(109.5%, -15.6%);
+  }
+  33.333% {
+    transform: translate(40.1%, -42.2%);
+  }
+  66.666% {
+    transform: translate(11.1%, -174.2%);
+  }
+  100% {
+    transform: translate(109.5%, -15.6%);
+  }
+}
+
+@keyframes hero-ellipse-two-laptop {
+  0% {
+    transform: translate(-107.4%, -66.4%);
+  }
+  33.333% {
+    transform: translate(-35.6%, 24.1%);
+  }
+  66.666% {
+    transform: translate(-6.8%, 191%);
+  }
+  100% {
+    transform: translate(-107.4%, -66.4%);
+  }
+}
+
+/* 1100px: лівий еліпс менше вправо, правий сильніше вліво */
+@keyframes hero-ellipse-one-narrow {
+  0% {
+    transform: translate(70%, -15.6%);
+  }
+  33.333% {
+    transform: translate(28%, -42.2%);
+  }
+  66.666% {
+    transform: translate(5%, -174.2%);
+  }
+  100% {
+    transform: translate(70%, -15.6%);
+  }
+}
+
+@keyframes hero-ellipse-two-narrow {
+  0% {
+    transform: translate(-120%, -66.4%);
+  }
+  33.333% {
+    transform: translate(-55%, 24.1%);
+  }
+  66.666% {
+    transform: translate(-25%, 191%);
+  }
+  100% {
+    transform: translate(-120%, -66.4%);
+  }
+}
+
+/* Mobile ellipses (%) — як desktop/laptop, у % від розміру еліпса */
+@keyframes hero-ellipse-one-mobile {
+  0% {
+    transform: translate(74.6%, -29.9%);
+  }
+  33.333% {
+    transform: translate(-5.1%, -45.1%);
+  }
+  66.666% {
+    transform: translate(13.2%, -153.2%);
+  }
+  100% {
+    transform: translate(130.4%, -13.7%);
+  }
+}
+
+@keyframes hero-ellipse-two-mobile {
+  0% {
+    transform: translate(-127.8%, -9.7%);
+  }
+  33.333% {
+    transform: translate(-70.6%, 55.1%);
+  }
+  66.666% {
+    transform: translate(-20.5%, 103%);
+  }
+  100% {
+    transform: translate(-152.6%, -9.7%);
   }
 }
