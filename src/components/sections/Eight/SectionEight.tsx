@@ -1,14 +1,14 @@
 import { useRef, useEffect } from "react";
 import "./SectionEight.css";
-import LiquidGlassBox from "./ui/LiquidGlassBox/LiquidGlassBox";
-import CtaIconBox from "./ui/CtaIconBox/CtaIconBox";
-import { IconCta1, IconCta2 } from "./ui/CtaIconBox/CtaIcons";
-import { getScaleForConfig } from "../utils/liquidGlass";
-import { trackEvent } from "../utils/analytics";
+import LiquidGlassBox from "../../ui/LiquidGlassBox/LiquidGlassBox";
+import CtaIconBox from "../../ui/CtaIconBox/CtaIconBox";
+import { IconCta1, IconCta2 } from "../../ui/CtaIconBox/CtaIcons";
+import { getScaleForConfig } from "../../../utils/liquidGlass";
+import { trackEvent } from "../../../utils/analytics";
 import {
   HERO_GLASS_PRESET,
   HERO_MOBILE_GLASS_PRESET,
-} from "./ui/GlassMapsExporter/glassMapsPresets";
+} from "../../ui/GlassMapsExporter/glassMapsPresets";
 
 const GLASS_WIDTH = 1500;
 const GLASS_HEIGHT = 518;
@@ -427,7 +427,7 @@ export default function SectionEight() {
         sentViewRef.current = true;
         trackEvent("cta_section_view", { location: "footer" });
       },
-      { threshold: 0.25, rootMargin: "0px" }
+      { threshold: 0.25, rootMargin: "0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();

@@ -1,5 +1,5 @@
 import "./HeroSection.css";
-import LiquidGlassBox from "./ui/LiquidGlassBox/LiquidGlassBox";
+import LiquidGlassBox from "../../ui/LiquidGlassBox/LiquidGlassBox";
 
 export default function HeroSection() {
   return (

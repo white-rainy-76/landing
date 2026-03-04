@@ -1,9 +1,9 @@
-import PrincipleSection from "./ui/PrincipleSection/PrincipleSection";
+import PrincipleSection from "../../ui/PrincipleSection/PrincipleSection";
 import {
   IconPrinciple7,
   IconPrinciple8,
   IconPrinciple9,
-} from "./ui/PrincipleCard/PrincipleCardIcons";
+} from "../../ui/PrincipleCard/PrincipleCardIcons";
 
 const CARDS = [
   {

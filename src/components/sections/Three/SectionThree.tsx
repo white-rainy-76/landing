@@ -1,9 +1,9 @@
 import React from "react";
 import "./SectionThree.css";
-import SectionTitle from "./ui/SectionTitle/SectionTitle";
-import SectionSubtitle from "./ui/SectionSubtitle/SectionSubtitle";
-import Badge from "./ui/Badge/Badge";
-import { useInView } from "../hooks/useInView";
+import SectionTitle from "../../ui/SectionTitle/SectionTitle";
+import SectionSubtitle from "../../ui/SectionSubtitle/SectionSubtitle";
+import Badge from "../../ui/Badge/Badge";
+import { useInView } from "../../../hooks/useInView";
 
 const SectionThree: React.FC = () => {
   const { ref, inView } = useInView(0.1);

@@ -1,7 +1,7 @@
 import "./SectionTwo.css";
-import SectionTitle from "./ui/SectionTitle/SectionTitle";
-import SectionSubtitle from "./ui/SectionSubtitle/SectionSubtitle";
-import { useInView } from "../hooks/useInView";
+import SectionTitle from "../../ui/SectionTitle/SectionTitle";
+import SectionSubtitle from "../../ui/SectionSubtitle/SectionSubtitle";
+import { useInView } from "../../../hooks/useInView";
 
 const LIST_ITEMS = [
   { num: "01", text: "Команда > Проєкт" },
@@ -30,8 +30,8 @@ export default function SectionTwo() {
             key={item.num}
             className={`section-two__list-item reveal-left ${inView ? "in-view" : ""}`}
             style={{
-            transitionDelay: inView ? `${0.2 + i * 0.12}s` : undefined,
-          }}
+              transitionDelay: inView ? `${0.2 + i * 0.12}s` : undefined,
+            }}
           >
             <span className="section-two__num">{item.num}</span>
             <span className="section-two__text">{item.text}</span>
