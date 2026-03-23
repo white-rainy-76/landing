@@ -28,6 +28,7 @@
   padding: 0 24px;
   padding-top: 120px;
   animation: hero-text-color 12s ease-out 1s infinite;
+  isolation: isolate;
 }
 
 /* --------------------------------------------------------------------------
@@ -38,7 +39,7 @@
   inset: 0;
   z-index: 0;
   background: #000;
-  contain: layout style paint;
+  pointer-events: none;
 }
 
 .hero__ellipse {
@@ -82,13 +83,19 @@
   top: 18px;
   right: 18px;
   left: auto;
-  z-index: 6;
+  z-index: 20;
   display: flex;
   gap: 6px;
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .hero__lang-btn {
   appearance: none;
+  position: relative;
+  z-index: 1;
   border: 1px solid rgba(0, 255, 159, 0.35);
   background: rgba(0, 0, 0, 0.25);
   color: rgba(0, 255, 159, 0.8);
@@ -103,6 +110,8 @@
   min-width: 52px;
   border-radius: 999px;
   cursor: pointer;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   transition:
     background 0.15s ease,
     color 0.15s ease,
@@ -472,7 +481,7 @@
   }
 
   .hero__lang-switch {
-    top: 12px;
+    top: calc(env(safe-area-inset-top) + 18px);
     right: 12px;
     gap: 4px;
   }
@@ -500,7 +509,7 @@
   }
 
   .hero__lang-switch {
-    top: 10px;
+    top: calc(env(safe-area-inset-top) + 16px);
     right: 10px;
   }
 }
