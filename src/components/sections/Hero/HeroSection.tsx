@@ -25,7 +25,6 @@ export default function HeroSection({
           />
         </div>
         <div className="hero__content">
-          <h1 className="hero__title">TEAMOCRACY</h1>
           <div className="hero__lang-switch" role="group" aria-label="Language">
             <button
               type="button"
@@ -44,6 +43,7 @@ export default function HeroSection({
               EN
             </button>
           </div>
+          <h1 className="hero__title">TEAMOCRACY</h1>
           <div className="hero__quote-wrap">
             <div className="hero__quote-reveal">
               <LiquidGlassBox
