@@ -79,24 +79,24 @@
    -------------------------------------------------------------------------- */
 .hero__lang-switch {
   position: absolute;
-  top: calc(20px + env(safe-area-inset-top, 0px));
-  right: calc(20px + env(safe-area-inset-right, 0px));
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  right: calc(14px + env(safe-area-inset-right, 0px));
   z-index: 3;
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .hero__lang-btn {
   appearance: none;
-  border: 1px solid rgba(0, 255, 159, 0.55);
-  background: rgba(0, 0, 0, 0.35);
-  color: #00ff9f;
+  border: 1px solid rgba(0, 255, 159, 0.35);
+  background: rgba(0, 0, 0, 0.25);
+  color: rgba(0, 255, 159, 0.8);
   font-family: "Gilroy", system-ui, sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0;
   line-height: 1;
-  padding: 10px 14px;
+  padding: 7px 10px;
   min-height: 40px;
   min-width: 52px;
   border-radius: 999px;
@@ -110,8 +110,8 @@
 }
 
 .hero__lang-btn.is-active {
-  background: rgba(0, 255, 159, 0.18);
-  border-color: rgba(0, 255, 159, 1);
+  background: rgba(0, 255, 159, 0.12);
+  border-color: rgba(0, 255, 159, 0.75);
   color: #00ff9f;
 }
 
@@ -258,12 +258,6 @@
     z-index: 2;
   }
 
-  .hero__lang-switch {
-    position: static;
-    align-self: flex-end;
-    margin-bottom: 18px;
-  }
-
   .hero__quote-wrap {
     position: relative;
     top: auto;
@@ -290,15 +284,16 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .hero__lang-switch {
-    margin-bottom: 14px;
-    gap: 6px;
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    right: calc(10px + env(safe-area-inset-right, 0px));
+    gap: 5px;
   }
 
   .hero__lang-btn {
-    min-height: 38px;
-    min-width: 48px;
-    padding: 8px 12px;
-    font-size: 13px;
+    min-height: 32px;
+    min-width: 40px;
+    padding: 6px 9px;
+    font-size: 11px;
   }
 }
 
@@ -471,14 +466,16 @@
   }
 
   .hero__lang-switch {
-    margin-bottom: 10px;
+    top: calc(8px + env(safe-area-inset-top, 0px));
+    right: calc(8px + env(safe-area-inset-right, 0px));
+    gap: 4px;
   }
 
   .hero__lang-btn {
-    min-height: 36px;
-    min-width: 44px;
-    padding: 7px 11px;
-    font-size: 12px;
+    min-height: 30px;
+    min-width: 36px;
+    padding: 5px 8px;
+    font-size: 10px;
   }
 }
 
@@ -496,7 +493,8 @@
   }
 
   .hero__lang-switch {
-    margin-bottom: 8px;
+    top: calc(6px + env(safe-area-inset-top, 0px));
+    right: calc(6px + env(safe-area-inset-right, 0px));
   }
 }
 
