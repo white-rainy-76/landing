@@ -79,9 +79,10 @@
    -------------------------------------------------------------------------- */
 .hero__lang-switch {
   position: absolute;
-  top: calc(18px + env(safe-area-inset-top, 0px));
-  right: calc(18px + env(safe-area-inset-right, 0px));
-  z-index: 3;
+  top: 18px;
+  right: 18px;
+  left: auto;
+  z-index: 6;
   display: flex;
   gap: 6px;
 }
@@ -101,7 +102,10 @@
   min-width: 52px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
     transform 0.15s ease;
 }
 
@@ -284,8 +288,8 @@
 /* Tablet */
 @media (max-width: 1024px) {
   .hero__lang-switch {
-    top: calc(14px + env(safe-area-inset-top, 0px));
-    right: calc(14px + env(safe-area-inset-right, 0px));
+    top: 14px;
+    right: 14px;
     gap: 5px;
   }
 
@@ -466,8 +470,8 @@
   }
 
   .hero__lang-switch {
-    top: calc(12px + env(safe-area-inset-top, 0px));
-    right: calc(12px + env(safe-area-inset-right, 0px));
+    top: 12px;
+    right: 12px;
     gap: 4px;
   }
 
@@ -493,8 +497,8 @@
   }
 
   .hero__lang-switch {
-    top: calc(10px + env(safe-area-inset-top, 0px));
-    right: calc(10px + env(safe-area-inset-right, 0px));
+    top: 10px;
+    right: 10px;
   }
 }
 
