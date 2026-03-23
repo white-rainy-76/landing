@@ -2,16 +2,12 @@ import "./SectionTwo.css";
 import SectionTitle from "../../ui/SectionTitle/SectionTitle";
 import SectionSubtitle from "../../ui/SectionSubtitle/SectionSubtitle";
 import { useInView } from "../../../hooks/useInView";
+import type { Lang } from "../../../i18n/types";
+import { DICTIONARY } from "../../../i18n/dictionary";
 
-const LIST_ITEMS = [
-  { num: "01", text: "Команда > Проєкт" },
-  { num: "02", text: "Довіра > Контроль" },
-  { num: "03", text: "Цінності > Правила" },
-  { num: "04", text: "Сила в порозуміні" },
-];
-
-export default function SectionTwo() {
+export default function SectionTwo({ lang }: { lang: Lang }) {
   const { ref, inView } = useInView(0.1);
+  const items = DICTIONARY[lang].sectionTwo.items;
 
   return (
     <section ref={ref} className="section-two">
@@ -22,10 +18,10 @@ export default function SectionTwo() {
         className={inView ? "reveal in-view" : "reveal"}
         styles={{ transitionDelay: inView ? "0.1s" : undefined }}
       >
-        Командрократичні команди здатні на більше, бо:
+        {DICTIONARY[lang].sectionTwo.subtitle}
       </SectionSubtitle>
       <ul className="section-two__list">
-        {LIST_ITEMS.map((item, i) => (
+        {items.map((item, i) => (
           <li
             key={item.num}
             className={`section-two__list-item reveal-left ${inView ? "in-view" : ""}`}

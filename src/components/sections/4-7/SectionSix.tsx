@@ -4,67 +4,55 @@ import {
   IconPrinciple8,
   IconPrinciple9,
 } from "../../ui/PrincipleCard/PrincipleCardIcons";
+import type { Lang } from "../../../i18n/types";
+import { DICTIONARY } from "../../../i18n/dictionary";
+import { renderMultiline } from "../../../i18n/renderMultiline";
 
-const CARDS = [
-  {
-    icon: <IconPrinciple7 />,
-    title: (
-      <>
-        Правила
-        <br />
-        застарілі
-      </>
-    ),
-    description:
-      "Правила формуються в минулому. Реальність швидко змінюється. Не вписується в правила.",
-    paddingTop: 67,
-    paddingTopMobile: 20,
-    stripStartDeg: 180,
-  },
-  {
-    icon: <IconPrinciple8 />,
-    title: (
-      <>
-        Цінності
-        <br />
-        дають азімут
-      </>
-    ),
-    description: (
-      <>
-        Нова ситуація?
-        <br />
-        Орієнтуйся на цінності.
-        <br />
-        Приймай рішення.
-      </>
-    ),
-    paddingTop: 65,
-    paddingTopMobile: 24,
-    stripStartDeg: 210,
-  },
-  {
-    icon: <IconPrinciple9 />,
-    title: "Гнучкість",
-    description:
-      "Нові виклики постійно. Цінності дають автономію. Діяти швидко.",
-    paddingTop: 82,
-    descriptionMarginTop: 42,
-    paddingTopMobile: 32,
-    stripStartDeg: 240,
-  },
-];
+function renderCardDescription(
+  description:
+    | { type: "text"; value: string }
+    | { type: "lines"; lines: string[] },
+) {
+  if (description.type === "text") return description.value;
+  return renderMultiline(description.lines.join("\n"));
+}
 
-export default function SectionSix() {
+export default function SectionSix({ lang }: { lang: Lang }) {
+  const t = DICTIONARY[lang].sectionSix;
+
   return (
     <PrincipleSection
-      topBadge="Принцип 03"
-      title="Цінності > Правила"
-      subtitle={
-        "Правила завжди відстають від реальності.\nЦінності — це компас для будь-яких ситуацій."
-      }
-      centerBadge="3 тижні апрув vs 1 день з цінностями"
-      cards={CARDS}
+      topBadge={t.topBadge}
+      title={t.title}
+      subtitle={t.subtitle}
+      centerBadge={t.centerBadge}
+      cards={[
+        {
+          icon: <IconPrinciple7 />,
+          title: renderMultiline(t.cards[0].title),
+          description: renderCardDescription(t.cards[0].description),
+          paddingTop: 67,
+          paddingTopMobile: 20,
+          stripStartDeg: 180,
+        },
+        {
+          icon: <IconPrinciple8 />,
+          title: renderMultiline(t.cards[1].title),
+          description: renderCardDescription(t.cards[1].description),
+          paddingTop: 65,
+          paddingTopMobile: 24,
+          stripStartDeg: 210,
+        },
+        {
+          icon: <IconPrinciple9 />,
+          title: renderMultiline(t.cards[2].title),
+          description: renderCardDescription(t.cards[2].description),
+          paddingTop: 82,
+          descriptionMarginTop: 42,
+          paddingTopMobile: 32,
+          stripStartDeg: 240,
+        },
+      ]}
     />
   );
 }

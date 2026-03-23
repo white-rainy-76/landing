@@ -1,25 +1,30 @@
-import React from "react";
 import "./SectionThree.css";
 import SectionTitle from "../../ui/SectionTitle/SectionTitle";
 import SectionSubtitle from "../../ui/SectionSubtitle/SectionSubtitle";
 import Badge from "../../ui/Badge/Badge";
 import { useInView } from "../../../hooks/useInView";
+import type { Lang } from "../../../i18n/types";
+import { DICTIONARY } from "../../../i18n/dictionary";
+import { renderMultiline } from "../../../i18n/renderMultiline";
 
-const SectionThree: React.FC = () => {
+type SectionThreeProps = { lang: Lang };
+
+export default function SectionThree({ lang }: SectionThreeProps) {
   const { ref, inView } = useInView(0.1);
   const viewClass = inView ? "reveal in-view" : "reveal";
 
   return (
     <section ref={ref} className="section-three">
-      <SectionTitle className={viewClass}>Проблематика</SectionTitle>
+      <SectionTitle className={viewClass}>
+        {DICTIONARY[lang].sectionThree.title}
+      </SectionTitle>
       <SectionSubtitle
         className={viewClass}
         styles={{
           transitionDelay: inView ? "0.08s" : undefined,
         }}
       >
-        Більшість інструментів створені для вертикального <br />
-        управління:
+        {renderMultiline(DICTIONARY[lang].sectionThree.subtitle)}
       </SectionSubtitle>
 
       <div className="section-three__visual">
@@ -29,7 +34,9 @@ const SectionThree: React.FC = () => {
         </div>
 
         <div className="section-three__node node-1">
-          <span className="section-three__text text-left">Керівник</span>
+          <span className="section-three__text text-left">
+            {DICTIONARY[lang].sectionThree.nodes.left}
+          </span>
           <div className="section-three__dot-wrapper">
             <div className="section-three__dot-glow"></div>
             <div className="section-three__dot"></div>
@@ -43,13 +50,17 @@ const SectionThree: React.FC = () => {
             <div className="section-three__dot-glow"></div>
             <div className="section-three__dot"></div>
           </div>
-          <span className="section-three__text text-right">Виконавець</span>
+          <span className="section-three__text text-right">
+            {DICTIONARY[lang].sectionThree.nodes.middle}
+          </span>
         </div>
 
         <div className="section-three__path path-2"></div>
 
         <div className="section-three__node node-3">
-          <span className="section-three__text text-left">Контроль</span>
+          <span className="section-three__text text-left">
+            {DICTIONARY[lang].sectionThree.nodes.right}
+          </span>
           <div className="section-three__dot-wrapper">
             <div className="section-three__dot-glow"></div>
             <div className="section-three__dot"></div>
@@ -62,20 +73,17 @@ const SectionThree: React.FC = () => {
         style={{ transitionDelay: inView ? "0.15s" : undefined }}
       >
         <p className="section-three__lead">
-          Але є команди, яким ефективніше працювати по-іншому
+          {DICTIONARY[lang].sectionThree.block.lead}
         </p>
         <p className="section-three__lead-secondary">
-          Горизонтально.
-          <br />З довірою, автономністю та поразумінням.
+          {renderMultiline(DICTIONARY[lang].sectionThree.block.leadSecondary)}
         </p>
         <div className="section-three__badges">
-          <Badge>-32% плинність</Badge>
-          <Badge>+140% залученість</Badge>
-          <Badge>+25% швидкість</Badge>
+          {DICTIONARY[lang].sectionThree.block.badges.map((b) => (
+            <Badge key={b}>{b}</Badge>
+          ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default SectionThree;
+}

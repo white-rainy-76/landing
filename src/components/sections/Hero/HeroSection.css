@@ -75,6 +75,45 @@
 }
 
 /* --------------------------------------------------------------------------
+   Language switcher
+   -------------------------------------------------------------------------- */
+.hero__lang-switch {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+}
+
+.hero__lang-btn {
+  appearance: none;
+  border: 1px solid rgba(0, 255, 159, 0.55);
+  background: rgba(0, 0, 0, 0.35);
+  color: #00ff9f;
+  font-family: "Gilroy", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.hero__lang-btn:hover {
+  transform: translateY(-1px);
+}
+
+.hero__lang-btn.is-active {
+  background: rgba(0, 255, 159, 0.18);
+  border-color: rgba(0, 255, 159, 1);
+  color: #00ff9f;
+}
+
+/* --------------------------------------------------------------------------
    Title
    -------------------------------------------------------------------------- */
 .hero__title {
@@ -215,6 +254,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+  }
+
+  .hero__lang-switch {
+    top: 18px;
+    right: 18px;
   }
 
   .hero__quote-wrap {
@@ -406,6 +450,16 @@
     text-align: center;
     margin: 0;
     color: #ffffff;
+  }
+
+  .hero__lang-switch {
+    top: 14px;
+    right: 14px;
+  }
+
+  .hero__lang-btn {
+    padding: 8px 12px;
+    font-size: 12px;
   }
 }
 

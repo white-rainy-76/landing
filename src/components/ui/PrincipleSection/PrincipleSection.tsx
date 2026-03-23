@@ -44,12 +44,22 @@ export default function PrincipleSection({
   cards,
   className,
 }: PrincipleSectionProps) {
+  const titleContent =
+    typeof title === "string" && title.includes("\n")
+      ? title.split("\n").map((line, i) => (
+          <span key={i}>
+            {i > 0 && <br />}
+            {line.trim()}
+          </span>
+        ))
+      : title;
+
   const subtitleContent =
     typeof subtitle === "string" && subtitle.includes("\n")
       ? subtitle.split("\n").map((line, i) => (
           <span key={i}>
             {i > 0 && <br />}
-            {line}
+            {line.trim()}
           </span>
         ))
       : subtitle;
@@ -69,7 +79,7 @@ export default function PrincipleSection({
         className={`principle-section__title ${viewClass}`}
         style={{ transitionDelay: inView ? "0.06s" : undefined }}
       >
-        {title}
+        {titleContent}
       </SectionTitle>
       <SectionSubtitle
         className={`principle-section__subtitle ${viewClass}`}

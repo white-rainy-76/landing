@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import "./SectionEight.css";
 import LiquidGlassBox from "../../ui/LiquidGlassBox/LiquidGlassBox";
 import CtaIconBox from "../../ui/CtaIconBox/CtaIconBox";
@@ -9,6 +9,9 @@ import {
   HERO_GLASS_PRESET,
   HERO_MOBILE_GLASS_PRESET,
 } from "../../ui/GlassMapsExporter/glassMapsPresets";
+import type { Lang } from "../../../i18n/types";
+import { DICTIONARY } from "../../../i18n/dictionary";
+import { renderMultiline } from "../../../i18n/renderMultiline";
 
 const GLASS_WIDTH = 1500;
 const GLASS_HEIGHT = 518;
@@ -413,9 +416,10 @@ function StaticGlassFilterDefs() {
   );
 }
 
-export default function SectionEight() {
+export default function SectionEight({ lang }: { lang: Lang }) {
   const ctasRef = useRef<HTMLDivElement>(null);
   const sentViewRef = useRef(false);
+  const t = DICTIONARY[lang].sectionEight;
 
   useEffect(() => {
     const el = ctasRef.current;
@@ -443,20 +447,15 @@ export default function SectionEight() {
       >
         <div className="section-eight__content">
           <h2 className="section-eight__title">
-            Teamocracy — це нова культура
-            <br />
-            командної взаємодії
+            {renderMultiline(t.titleLines.join("\n"))}
           </h2>
           <p className="section-eight__text">
-            <b>Ніхто не вигадував Teamocracy.</b>
-            <br />
-            Як і все інше, вона існувала собі у Всесвіті, допоки хтось не
-            звернув на неї увагу.
-            <br />
-            Все, що ми зробили, так це просто дали ім&apos;я принципам, що
-            дозволяють краще
-            <br />
-            співпрацювати командам.
+            {t.paragraph.parts.map((part, i) => (
+              <Fragment key={i}>
+                {i > 0 && <br />}
+                {part.bold ? <b>{part.text}</b> : part.text}
+              </Fragment>
+            ))}
           </p>
           <div ref={ctasRef} className="section-eight__ctas">
             <a
@@ -473,9 +472,7 @@ export default function SectionEight() {
               }}
             >
               <span className="section-eight__cta-label">
-                Cлідкуй
-                <br />
-                за оновленнями
+                {renderMultiline(t.ctas.follow.lines.join("\n"))}
               </span>
               <div className="section-eight__cta-icon">
                 <CtaIconBox>
@@ -497,9 +494,7 @@ export default function SectionEight() {
               }}
             >
               <span className="section-eight__cta-label">
-                Долучитись
-                <br />
-                до обговорення
+                {renderMultiline(t.ctas.join.lines.join("\n"))}
               </span>
               <div className="section-eight__cta-icon">
                 <CtaIconBox>

@@ -10,9 +10,30 @@ import SectionEight from "./components/sections/Eight/SectionEight";
 // import GlassMapsExporter from "./components/ui/GlassMapsExporter/GlassMapsExporter";
 // import { GLASS_MAPS_PRESETS } from "./components/ui/GlassMapsExporter/glassMapsPresets";
 import "./App.css";
+import type { Lang } from "./i18n/types";
+
+function getInitialLang(): Lang {
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get("lang");
+  if (q === "ua" || q === "en") return q;
+
+  try {
+    const stored = window.localStorage.getItem("teamocracy_lang");
+    if (stored === "ua" || stored === "en") return stored;
+  } catch {
+    // Ignore storage errors (e.g., privacy mode)
+  }
+
+  const nav = (navigator.language || "").toLowerCase();
+  if (nav.startsWith("uk")) return "ua";
+  if (nav.startsWith("en")) return "en";
+  // Fallback to the site's current default language.
+  return "ua";
+}
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [lang, setLang] = useState<Lang>(() => getInitialLang());
 
   useEffect(() => {
     const onScroll = () => {
@@ -39,6 +60,15 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("teamocracy_lang", lang);
+    } catch {
+      // Ignore storage errors
+    }
+    document.documentElement.lang = lang === "ua" ? "uk" : "en";
+  }, [lang]);
+
   return (
     <div className="landing">
       <div
@@ -47,21 +77,33 @@ function App() {
         aria-valuenow={Math.round(scrollProgress * 100)}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label="Прогрес прокрутки"
+        aria-label={lang === "ua" ? "Прогрес прокрутки" : "Scroll progress"}
       >
         <div
           className="scroll-progress__fill"
           style={{ width: `${scrollProgress * 100}%` }}
         />
       </div>
-      <HeroSection />
-      <SectionTwo />
-      <SectionThree />
-      <SectionFour />
-      <SectionFive />
-      <SectionSix />
-      <SectionSeven />
-      <SectionEight />
+      <HeroSection
+        lang={lang}
+        setLang={(nextLang) => {
+          setLang(nextLang);
+          try {
+            const url = new URL(window.location.href);
+            url.searchParams.set("lang", nextLang);
+            window.history.replaceState({}, "", url.toString());
+          } catch {
+            // Ignore URL update failures.
+          }
+        }}
+      />
+      <SectionTwo lang={lang} />
+      <SectionThree lang={lang} />
+      <SectionFour lang={lang} />
+      <SectionFive lang={lang} />
+      <SectionSix lang={lang} />
+      <SectionSeven lang={lang} />
+      <SectionEight lang={lang} />
       {/* <GlassMapsExporter
         presets={GLASS_MAPS_PRESETS}
         className="glass-maps-exporter-app"
