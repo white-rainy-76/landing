@@ -76,60 +76,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Language switcher
-   -------------------------------------------------------------------------- */
-.hero__lang-switch {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  left: auto;
-  z-index: 20;
-  display: flex;
-  gap: 6px;
-  isolation: isolate;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform;
-}
-
-.hero__lang-btn {
-  appearance: none;
-  position: relative;
-  z-index: 1;
-  border: 1px solid rgba(0, 255, 159, 0.35);
-  background: rgba(0, 0, 0, 0.25);
-  color: rgba(0, 255, 159, 0.8);
-  font-family: "Gilroy", system-ui, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 12px;
-  letter-spacing: 0.36px;
-  line-height: 100%;
-  padding: 7px 10px;
-  min-height: 40px;
-  min-width: 52px;
-  border-radius: 999px;
-  cursor: pointer;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease,
-    transform 0.15s ease;
-}
-
-.hero__lang-btn:hover {
-  transform: translateY(-1px);
-}
-
-.hero__lang-btn.is-active {
-  background: rgba(0, 255, 159, 0.12);
-  border-color: rgba(0, 255, 159, 0.75);
-  color: #00ff9f;
-}
-
-/* --------------------------------------------------------------------------
    Title
    -------------------------------------------------------------------------- */
 .hero__title {
@@ -297,19 +243,6 @@
 
 /* Tablet */
 @media (max-width: 1024px) {
-  .hero__lang-switch {
-    top: 14px;
-    right: 14px;
-    gap: 5px;
-  }
-
-  .hero__lang-btn {
-    min-height: 32px;
-    min-width: 40px;
-    padding: 6px 9px;
-    font-size: 11px;
-    letter-spacing: 0.36px;
-  }
 }
 
 @media (max-width: 1400px) {
@@ -480,19 +413,6 @@
     color: #ffffff;
   }
 
-  .hero__lang-switch {
-    top: calc(env(safe-area-inset-top) + 18px);
-    right: 12px;
-    gap: 4px;
-  }
-
-  .hero__lang-btn {
-    min-height: 30px;
-    min-width: 36px;
-    padding: 5px 8px;
-    font-size: 10px;
-    letter-spacing: 0.36px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -508,10 +428,6 @@
     font-size: 14.48px;
   }
 
-  .hero__lang-switch {
-    top: calc(env(safe-area-inset-top) + 16px);
-    right: 10px;
-  }
 }
 
 /* --------------------------------------------------------------------------

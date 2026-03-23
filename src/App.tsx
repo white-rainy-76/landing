@@ -35,6 +35,17 @@ function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
 
+  const handleLangChange = (nextLang: Lang) => {
+    setLang(nextLang);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", nextLang);
+      window.history.replaceState({}, "", url.toString());
+    } catch {
+      // Ignore URL update failures.
+    }
+  };
+
   useEffect(() => {
     const onScroll = () => {
       const scrollTop = window.scrollY ?? document.documentElement.scrollTop;
@@ -71,6 +82,24 @@ function App() {
 
   return (
     <div className="landing">
+      <div className="app-lang-switch" role="group" aria-label="Language">
+        <button
+          type="button"
+          className={`app-lang-btn ${lang === "ua" ? "is-active" : ""}`}
+          aria-pressed={lang === "ua"}
+          onClick={() => handleLangChange("ua")}
+        >
+          UA
+        </button>
+        <button
+          type="button"
+          className={`app-lang-btn ${lang === "en" ? "is-active" : ""}`}
+          aria-pressed={lang === "en"}
+          onClick={() => handleLangChange("en")}
+        >
+          EN
+        </button>
+      </div>
       <div
         className="scroll-progress"
         role="progressbar"
@@ -84,19 +113,7 @@ function App() {
           style={{ width: `${scrollProgress * 100}%` }}
         />
       </div>
-      <HeroSection
-        lang={lang}
-        setLang={(nextLang) => {
-          setLang(nextLang);
-          try {
-            const url = new URL(window.location.href);
-            url.searchParams.set("lang", nextLang);
-            window.history.replaceState({}, "", url.toString());
-          } catch {
-            // Ignore URL update failures.
-          }
-        }}
-      />
+      <HeroSection lang={lang} />
       <SectionTwo lang={lang} />
       <SectionThree lang={lang} />
       <SectionFour lang={lang} />

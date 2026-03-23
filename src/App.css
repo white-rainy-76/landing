@@ -30,6 +30,56 @@
   transition: width 0.12s ease-out;
 }
 
+.app-lang-switch {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 12px);
+  right: 12px;
+  z-index: 9998;
+  display: flex;
+  gap: 4px;
+  isolation: isolate;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+.app-lang-btn {
+  appearance: none;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(0, 255, 159, 0.35);
+  background: rgba(0, 0, 0, 0.72);
+  color: rgba(0, 255, 159, 0.8);
+  font-family: "Gilroy", system-ui, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0.36px;
+  min-height: 30px;
+  min-width: 36px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  cursor: pointer;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.app-lang-btn:hover {
+  transform: translateY(-1px);
+}
+
+.app-lang-btn.is-active {
+  background: rgba(0, 255, 159, 0.12);
+  border-color: rgba(0, 255, 159, 0.75);
+  color: #00ff9f;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress__fill {
     transition: none;
@@ -98,6 +148,11 @@
 
 /* Mobile: smaller ellipse, visible near the bottom edge */
 @media (max-width: 768px) {
+  .app-lang-switch {
+    top: calc(env(safe-area-inset-top) + 12px);
+    right: 12px;
+  }
+
   .bottom-ellipse-track {
     min-height: 420px;
     bottom: -45px;
