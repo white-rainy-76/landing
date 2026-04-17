@@ -177,31 +177,34 @@ function CloseIcon() {
       aria-hidden
     >
       <rect
+        className="manifesto-close__ring"
         x="2"
         y="2"
         width="55.8025"
         height="55.8025"
         rx="27.9012"
-        stroke="#36A179"
+        stroke="currentColor"
         strokeWidth="4"
       />
       <rect
+        className="manifesto-close__bar"
         x="14.3447"
         y="42.629"
         width="40"
         height="4"
         rx="2"
         transform="rotate(-45 14.3447 42.629)"
-        fill="#36A179"
+        fill="currentColor"
       />
       <rect
+        className="manifesto-close__bar"
         x="42.629"
         y="45.4574"
         width="40"
         height="4"
         rx="2"
         transform="rotate(-135 42.629 45.4574)"
-        fill="#36A179"
+        fill="currentColor"
       />
     </svg>
   );
