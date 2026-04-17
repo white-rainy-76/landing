@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./ManifestoScrollModal.css";
 import LiquidGlassBox from "../LiquidGlassBox/LiquidGlassBox";
 import ManifestoDownloadButton from "../ManifestoDownloadButton/ManifestoDownloadButton";
@@ -8,8 +8,12 @@ import manifestoPdfUrl from "../../../assets/Teamocracy_Manifesto.pdf?url";
 import { trackEvent } from "../../../utils/analytics";
 
 const MODAL_WIDTH = 957;
-const MODAL_HEIGHT = 590;
+const MODAL_HEIGHT = 360;
 const MODAL_SCALE = 52;
+
+const MODAL_WIDTH_MOBILE = 350;
+const MODAL_HEIGHT_MOBILE = 360;
+const MODAL_SCALE_MOBILE = 40;
 
 function GlassNoiseOverlay() {
   return (
@@ -98,6 +102,67 @@ function ModalGlassFilterDefs() {
           />
           <feBlend in="spec_faded" in2="with_sat" mode="normal" />
         </filter>
+        <filter
+          id="static-glass-manifesto-modal-mobile"
+          x="0%"
+          y="0%"
+          width="100%"
+          height="100%"
+        >
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="8"
+            result="blurred_source"
+          />
+          <feImage
+            href="/images/glass-displacement.png"
+            x="0"
+            y="0"
+            width={MODAL_WIDTH_MOBILE}
+            height={MODAL_HEIGHT_MOBILE}
+            preserveAspectRatio="none"
+            result="disp_map"
+          />
+          <feDisplacementMap
+            in="blurred_source"
+            in2="disp_map"
+            scale={MODAL_SCALE_MOBILE}
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="displaced"
+          />
+          <feColorMatrix
+            in="displaced"
+            type="saturate"
+            values="2"
+            result="displaced_sat"
+          />
+          <feImage
+            href="/images/glass-specular.png"
+            x="0"
+            y="0"
+            width={MODAL_WIDTH_MOBILE}
+            height={MODAL_HEIGHT_MOBILE}
+            preserveAspectRatio="none"
+            result="spec_layer"
+          />
+          <feComposite
+            in="displaced_sat"
+            in2="spec_layer"
+            operator="in"
+            result="spec_masked"
+          />
+          <feComponentTransfer in="spec_layer" result="spec_faded">
+            <feFuncA type="linear" slope="1" />
+          </feComponentTransfer>
+          <feBlend
+            in="spec_masked"
+            in2="displaced"
+            mode="normal"
+            result="with_sat"
+          />
+          <feBlend in="spec_faded" in2="with_sat" mode="normal" />
+        </filter>
       </defs>
     </svg>
   );
@@ -154,6 +219,14 @@ export default function ManifestoScrollModal({
   onClose: () => void;
 }) {
   const t = DICTIONARY[lang].manifestoModal;
+  const [isNarrowViewport, setIsNarrowViewport] = useState(false);
+
+  useEffect(() => {
+    const update = () => setIsNarrowViewport(window.innerWidth <= 768);
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -184,8 +257,12 @@ export default function ManifestoScrollModal({
       <LiquidGlassBox
         className="manifesto-scroll-modal"
         contentClassName="manifesto-scroll-modal__content"
-        filterId="static-glass-manifesto-modal"
-        borderRadius={20.49}
+        filterId={
+          isNarrowViewport
+            ? "static-glass-manifesto-modal-mobile"
+            : "static-glass-manifesto-modal"
+        }
+        borderRadius={isNarrowViewport ? 12 : 20.49}
       >
         <button
           type="button"
