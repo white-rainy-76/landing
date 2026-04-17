@@ -11,8 +11,6 @@ const MODAL_WIDTH = 957;
 const MODAL_HEIGHT = 590;
 const MODAL_SCALE = 52;
 
-const MODAL_WIDTH_MOBILE = 350;
-const MODAL_HEIGHT_MOBILE = 360;
 const MODAL_SCALE_MOBILE = 40;
 
 function GlassNoiseOverlay() {
@@ -118,8 +116,8 @@ function ModalGlassFilterDefs() {
             href="/images/glass-displacement.png"
             x="0"
             y="0"
-            width={MODAL_WIDTH_MOBILE}
-            height={MODAL_HEIGHT_MOBILE}
+            width="100%"
+            height="100%"
             preserveAspectRatio="none"
             result="disp_map"
           />
@@ -141,8 +139,8 @@ function ModalGlassFilterDefs() {
             href="/images/glass-specular.png"
             x="0"
             y="0"
-            width={MODAL_WIDTH_MOBILE}
-            height={MODAL_HEIGHT_MOBILE}
+            width="100%"
+            height="100%"
             preserveAspectRatio="none"
             result="spec_layer"
           />
