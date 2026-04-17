@@ -280,6 +280,7 @@ export default function ManifestoScrollModal({
           <ManifestoDownloadButton
             className="manifesto-scroll-modal__btn"
             href={manifestoPdfUrl}
+            download="Teamocracy_Manifesto.pdf"
             label={t.buttonLabel}
             onClick={() => {
               trackEvent("cta_click", {

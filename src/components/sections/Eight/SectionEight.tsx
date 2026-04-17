@@ -409,6 +409,7 @@ export default function SectionEight({ lang }: { lang: Lang }) {
           </h2>
           <ManifestoDownloadButton
             href={manifestoPdfUrl}
+            download="Teamocracy_Manifesto.pdf"
             label={t.manifesto.label}
             onClick={() => {
               trackEvent("cta_click", {

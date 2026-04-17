@@ -5,18 +5,24 @@ export default function ManifestoDownloadButton({
   label,
   onClick,
   className,
+  download,
 }: {
   href: string;
   label: string;
   onClick?: () => void;
   className?: string;
+  /** If set, browser saves the file with this name instead of opening a new tab (same-origin URLs). */
+  download?: string;
 }) {
+  const openInNewTab = download == null;
+
   return (
     <a
       className={["manifesto-download-btn", className].filter(Boolean).join(" ")}
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(openInNewTab
+        ? { target: "_blank", rel: "noopener noreferrer" as const }
+        : { download })}
       onClick={onClick}
     >
       <span className="manifesto-download-btn__icon" aria-hidden>
