@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import "./SectionEight.css";
 import LiquidGlassBox from "../../ui/LiquidGlassBox/LiquidGlassBox";
 import CtaIconBox from "../../ui/CtaIconBox/CtaIconBox";
@@ -12,23 +12,21 @@ import {
 import type { Lang } from "../../../i18n/types";
 import { DICTIONARY } from "../../../i18n/dictionary";
 import { renderMultiline } from "../../../i18n/renderMultiline";
+import manifestoPdfUrl from "../../../assets/Teamocracy_Manifesto.pdf?url";
+import ManifestoDownloadButton from "../../ui/ManifestoDownloadButton/ManifestoDownloadButton";
 
 const GLASS_WIDTH = 1500;
-const GLASS_HEIGHT = 518;
+const GLASS_HEIGHT = 750;
 const GLASS_SCALE = 52;
-
-/** Tablet (≈1224px): height 718px, dedicated PNG maps */
-const GLASS_WIDTH_TABLET = 1500;
-const GLASS_HEIGHT_TABLET = 718;
-const GLASS_SCALE_TABLET = 52;
 
 /** 1230px down to mobile: 907×716, dedicated PNG maps */
 const GLASS_WIDTH_1230 = 907;
-const GLASS_HEIGHT_1230 = 716;
+const GLASS_HEIGHT_1230 = 900;
 const GLASS_SCALE_1230 = 52;
 
-const GLASS_WIDTH_MOBILE = 378;
-const GLASS_HEIGHT_MOBILE = 201;
+// Mobile container uses 266×320 in CSS, keep filter maps in sync
+const GLASS_WIDTH_MOBILE = 266;
+const GLASS_HEIGHT_MOBILE = 330;
 const GLASS_SCALE_MOBILE = 48;
 
 /** Single SVG noise filter for all glass elements, used by LiquidGlassBox */
@@ -77,6 +75,7 @@ function StaticGlassFilterDefs() {
             y="0"
             width={GLASS_WIDTH}
             height={GLASS_HEIGHT}
+            preserveAspectRatio="none"
             result="disp_map"
           />
           <feDisplacementMap
@@ -99,66 +98,7 @@ function StaticGlassFilterDefs() {
             y="0"
             width={GLASS_WIDTH}
             height={GLASS_HEIGHT}
-            result="spec_layer"
-          />
-          <feComposite
-            in="displaced_sat"
-            in2="spec_layer"
-            operator="in"
-            result="spec_masked"
-          />
-          <feComponentTransfer in="spec_layer" result="spec_faded">
-            <feFuncA type="linear" slope="1" />
-          </feComponentTransfer>
-          <feBlend
-            in="spec_masked"
-            in2="displaced"
-            mode="normal"
-            result="with_sat"
-          />
-          <feBlend in="spec_faded" in2="with_sat" mode="normal" />
-        </filter>
-        {/* Tablet (1224px): maps 1500×718, glass fills full height */}
-        <filter
-          id="static-glass-section8-tablet"
-          x="0%"
-          y="0%"
-          width="100%"
-          height="100%"
-        >
-          <feGaussianBlur
-            in="SourceGraphic"
-            stdDeviation="10"
-            result="blurred_source"
-          />
-          <feImage
-            href="/images/glass-displacement-tablet.png"
-            x="0"
-            y="0"
-            width={GLASS_WIDTH_TABLET}
-            height={GLASS_HEIGHT_TABLET}
-            result="disp_map"
-          />
-          <feDisplacementMap
-            in="blurred_source"
-            in2="disp_map"
-            scale={GLASS_SCALE_TABLET}
-            xChannelSelector="R"
-            yChannelSelector="G"
-            result="displaced"
-          />
-          <feColorMatrix
-            in="displaced"
-            type="saturate"
-            values="2"
-            result="displaced_sat"
-          />
-          <feImage
-            href="/images/glass-specular-tablet.png"
-            x="0"
-            y="0"
-            width={GLASS_WIDTH_TABLET}
-            height={GLASS_HEIGHT_TABLET}
+            preserveAspectRatio="none"
             result="spec_layer"
           />
           <feComposite
@@ -197,6 +137,7 @@ function StaticGlassFilterDefs() {
             y="0"
             width={GLASS_WIDTH_1230}
             height={GLASS_HEIGHT_1230}
+            preserveAspectRatio="none"
             result="disp_map"
           />
           <feDisplacementMap
@@ -219,6 +160,7 @@ function StaticGlassFilterDefs() {
             y="0"
             width={GLASS_WIDTH_1230}
             height={GLASS_HEIGHT_1230}
+            preserveAspectRatio="none"
             result="spec_layer"
           />
           <feComposite
@@ -256,6 +198,7 @@ function StaticGlassFilterDefs() {
             y="0"
             width={GLASS_WIDTH_MOBILE}
             height={GLASS_HEIGHT_MOBILE}
+            preserveAspectRatio="none"
             result="disp_map"
           />
           <feDisplacementMap
@@ -278,6 +221,7 @@ function StaticGlassFilterDefs() {
             y="0"
             width={GLASS_WIDTH_MOBILE}
             height={GLASS_HEIGHT_MOBILE}
+            preserveAspectRatio="none"
             result="spec_layer"
           />
           <feComposite
@@ -420,6 +364,20 @@ export default function SectionEight({ lang }: { lang: Lang }) {
   const ctasRef = useRef<HTMLDivElement>(null);
   const sentViewRef = useRef(false);
   const t = DICTIONARY[lang].sectionEight;
+  const [filterId, setFilterId] = useState("static-glass-section8");
+
+  useEffect(() => {
+    const pick = () => {
+      const w = window.innerWidth;
+      if (w <= 768) return "static-glass-section8-mobile";
+      if (w <= 1230) return "static-glass-section8-1230";
+      return "static-glass-section8";
+    };
+    const update = () => setFilterId(pick());
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   useEffect(() => {
     const el = ctasRef.current;
@@ -443,12 +401,23 @@ export default function SectionEight({ lang }: { lang: Lang }) {
       <div className="section-eight__bg" aria-hidden />
       <LiquidGlassBox
         className="section-eight__glass"
-        filterId="static-glass-section8"
+        filterId={filterId}
       >
         <div className="section-eight__content">
           <h2 className="section-eight__title">
             {renderMultiline(t.titleLines.join("\n"))}
           </h2>
+          <ManifestoDownloadButton
+            href={manifestoPdfUrl}
+            label={t.manifesto.label}
+            onClick={() => {
+              trackEvent("cta_click", {
+                location: "footer",
+                channel: "manifesto",
+                link_url: manifestoPdfUrl,
+              });
+            }}
+          />
           <p className="section-eight__text">
             {t.paragraph.parts.map((part, i) => (
               <Fragment key={i}>
@@ -458,28 +427,6 @@ export default function SectionEight({ lang }: { lang: Lang }) {
             ))}
           </p>
           <div ref={ctasRef} className="section-eight__ctas">
-            <a
-              href="https://t.me/teamocracy_org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="section-eight__cta"
-              onClick={() => {
-                trackEvent("cta_click", {
-                  location: "footer",
-                  channel: "telegram",
-                  link_url: "https://t.me/teamocracy_org",
-                });
-              }}
-            >
-              <span className="section-eight__cta-label">
-                {renderMultiline(t.ctas.follow.lines.join("\n"))}
-              </span>
-              <div className="section-eight__cta-icon">
-                <CtaIconBox>
-                  <IconCta1 />
-                </CtaIconBox>
-              </div>
-            </a>
             <a
               href="https://www.threads.com/@teamocracy_org?xmt=AQF0uodeJ37d4FpsOMlBNTDKJgTW5Qe39K6BE3CuRn-YfkY"
               target="_blank"
@@ -499,6 +446,28 @@ export default function SectionEight({ lang }: { lang: Lang }) {
               <div className="section-eight__cta-icon">
                 <CtaIconBox>
                   <IconCta2 />
+                </CtaIconBox>
+              </div>
+            </a>
+            <a
+              href="https://www.instagram.com/teamocracy_org?igsh=aDdwcWp1N2xlc2I2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="section-eight__cta"
+              onClick={() => {
+                trackEvent("cta_click", {
+                  location: "footer",
+                  channel: "instagram",
+                  link_url: "https://www.instagram.com/teamocracy_org?igsh=aDdwcWp1N2xlc2I2",
+                });
+              }}
+            >
+              <span className="section-eight__cta-label">
+                {renderMultiline(t.ctas.follow.lines.join("\n"))}
+              </span>
+              <div className="section-eight__cta-icon">
+                <CtaIconBox>
+                  <IconCta1 />
                 </CtaIconBox>
               </div>
             </a>

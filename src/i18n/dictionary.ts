@@ -15,7 +15,7 @@ export const DICTIONARY = {
       quote: "Команда — це більше,\nніж сума навичок.\nЦе культура.",
     },
     sectionTwo: {
-      subtitle: "Командрократичні команди здатні на більше, бо:",
+      subtitle: "Командократичні команди здатні на більше, бо:",
       items: [
         { num: "01", text: "Команда > Проєкт" },
         { num: "02", text: "Довіра > Контроль" },
@@ -62,7 +62,7 @@ export const DICTIONARY = {
           } satisfies DescriptionText,
         },
         {
-          title: "Нетерпимість\ndо токсичності",
+          title: "Нетерпимість\nдо токсичності",
           description: {
             type: "lines",
             lines: [
@@ -194,9 +194,18 @@ export const DICTIONARY = {
         ],
       },
       ctas: {
-        follow: { lines: ["Слідкуй", "за оновленнями"] },
+        follow: { lines: ["Стежити", "за сторінкою"] },
         join: { lines: ["Долучитись", "до обговорення"] },
       },
+      manifesto: {
+        label: "Завантажити повний Маніфест",
+      },
+    },
+    manifestoModal: {
+      title: "Дізнайся більше",
+      subtitle:
+        "Завантажуй повний Маніфест \nта ознайомся із принципами Teamocracy.",
+      buttonLabel: "Завантажити зараз",
     },
   },
   en: {
@@ -392,9 +401,18 @@ export const DICTIONARY = {
         ],
       },
       ctas: {
-        follow: { lines: ["Follow", "for updates"] },
+        follow: { lines: ["Follow on", "social media"] },
         join: { lines: ["Join the", "discussion"] },
       },
+      manifesto: {
+        label: "Download the full Manifesto",
+      },
+    },
+    manifestoModal: {
+      title: "Learn more",
+      subtitle:
+        "Download the full Manifesto \nand learn about the principles of Teamocracy.",
+      buttonLabel: "Download now",
     },
   },
 } as const satisfies Record<Lang, unknown>;

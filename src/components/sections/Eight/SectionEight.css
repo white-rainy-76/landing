@@ -21,7 +21,7 @@
   z-index: 1;
   width: min(1500px, 92vw);
   max-width: 100%;
-  height: 518px;
+  height: 750px;
 }
 
 .section-eight__content {
@@ -66,6 +66,8 @@
     margin-top: 0.75em;
     padding: 0 8px;
   }
+
+  /* Manifesto button is now a shared component */
 }
 @media (max-width: 1224px) {
   .section-eight__title {
@@ -76,15 +78,8 @@
 @media (max-width: 1230px) {
   .section-eight__glass {
     width: min(907px, 92vw);
-    height: 716px;
-    min-height: 716px;
-  }
-
-  .section-eight__glass .liquid-glass-box__refraction {
-    display: none !important;
-    visibility: hidden !important;
-    filter: none !important;
-    -webkit-filter: none !important;
+    height: 900px;
+    min-height: 900px;
   }
 
   .section-eight__glass .liquid-glass-box__refraction,
@@ -94,6 +89,8 @@
     height: 100%;
     min-height: 100%;
   }
+
+  /* Manifesto button is now a shared component */
 }
 
 @media (max-width: 1224px) {
@@ -115,6 +112,8 @@
   vertical-align: middle;
   max-width: 1124px;
 }
+
+/* Manifesto button moved to shared component (`ManifestoDownloadButton`) */
 
 .section-eight__ctas {
   margin-top: 27px;
@@ -209,6 +208,8 @@
     text-align: center;
     vertical-align: middle;
   }
+
+  /* Manifesto button is now a shared component */
 
   .section-eight__ctas {
     margin-top: 17px;

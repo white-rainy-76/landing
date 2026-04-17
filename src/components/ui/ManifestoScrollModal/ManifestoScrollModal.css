@@ -1,0 +1,124 @@
+.manifesto-scroll-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.manifesto-scroll-modal {
+  width: 957px;
+  height: 590px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+}
+
+.manifesto-scroll-modal__content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.manifesto-scroll-modal__close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.manifesto-scroll-modal__close:focus-visible {
+  outline: 3px solid rgba(54, 161, 121, 0.5);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+.manifesto-scroll-modal__center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.manifesto-scroll-modal__title {
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 80px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.manifesto-scroll-modal__subtitle {
+  margin-top: 10px;
+  font-family: "Gilroy", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #36a179;
+  white-space: pre-line;
+}
+
+.manifesto-scroll-modal__btn {
+  margin-top: 42px;
+}
+
+@media (max-width: 980px) {
+  .manifesto-scroll-modal {
+    width: min(957px, calc(100vw - 48px));
+    height: auto;
+    min-height: 420px;
+  }
+
+  .manifesto-scroll-modal__title {
+    font-size: 56px;
+  }
+
+  .manifesto-scroll-modal__subtitle {
+    font-size: 22px;
+    line-height: 1.15;
+  }
+}
+
+@media (max-width: 768px) {
+  .manifesto-scroll-modal__content {
+    padding: 22px;
+  }
+
+  .manifesto-scroll-modal__close {
+    top: 16px;
+    right: 16px;
+    transform: scale(0.85);
+    transform-origin: top right;
+  }
+
+  .manifesto-scroll-modal__title {
+    font-size: 38px;
+  }
+
+  .manifesto-scroll-modal__subtitle {
+    font-size: 16px;
+  }
+}
+

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import HeroSection from "./components/sections/Hero/HeroSection";
 import SectionTwo from "./components/sections/Two/SectionTwo";
 import SectionThree from "./components/sections/Three/SectionThree";
@@ -11,6 +11,7 @@ import SectionEight from "./components/sections/Eight/SectionEight";
 // import { GLASS_MAPS_PRESETS } from "./components/ui/GlassMapsExporter/glassMapsPresets";
 import "./App.css";
 import type { Lang } from "./i18n/types";
+import ManifestoScrollModal from "./components/ui/ManifestoScrollModal/ManifestoScrollModal";
 
 function getInitialLang(): Lang {
   const params = new URLSearchParams(window.location.search);
@@ -34,6 +35,8 @@ function getInitialLang(): Lang {
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
+  const [isManifestoModalOpen, setIsManifestoModalOpen] = useState(false);
+  const afterSectionTwoRef = useRef<HTMLDivElement | null>(null);
 
   const handleLangChange = (nextLang: Lang) => {
     setLang(nextLang);
@@ -70,6 +73,45 @@ function App() {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const el = afterSectionTwoRef.current;
+    if (!el) return;
+
+    const alreadyShownThisSession = () => {
+      try {
+        return (
+          window.sessionStorage.getItem("teamocracy_manifesto_modal_shown") ===
+          "1"
+        );
+      } catch {
+        return false;
+      }
+    };
+
+    const markShownThisSession = () => {
+      try {
+        window.sessionStorage.setItem("teamocracy_manifesto_modal_shown", "1");
+      } catch {
+        // Ignore storage errors
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry?.isIntersecting) return;
+        if (isManifestoModalOpen) return;
+        if (alreadyShownThisSession()) return;
+        markShownThisSession();
+        setIsManifestoModalOpen(true);
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -20% 0px" },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isManifestoModalOpen]);
 
   useEffect(() => {
     try {
@@ -115,12 +157,20 @@ function App() {
       </div>
       <HeroSection lang={lang} />
       <SectionTwo lang={lang} />
+      <div ref={afterSectionTwoRef} aria-hidden />
       <SectionThree lang={lang} />
       <SectionFour lang={lang} />
       <SectionFive lang={lang} />
       <SectionSix lang={lang} />
       <SectionSeven lang={lang} />
       <SectionEight lang={lang} />
+      <ManifestoScrollModal
+        lang={lang}
+        isOpen={isManifestoModalOpen}
+        onClose={() => {
+          setIsManifestoModalOpen(false);
+        }}
+      />
       {/* <GlassMapsExporter
         presets={GLASS_MAPS_PRESETS}
         className="glass-maps-exporter-app"
