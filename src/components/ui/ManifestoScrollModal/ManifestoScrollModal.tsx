@@ -8,7 +8,7 @@ import manifestoPdfUrl from "../../../assets/Teamocracy_Manifesto.pdf?url";
 import { trackEvent } from "../../../utils/analytics";
 
 const MODAL_WIDTH = 957;
-const MODAL_HEIGHT = 360;
+const MODAL_HEIGHT = 590;
 const MODAL_SCALE = 52;
 
 const MODAL_WIDTH_MOBILE = 350;
