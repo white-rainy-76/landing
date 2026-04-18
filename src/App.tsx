@@ -36,7 +36,7 @@ function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [lang, setLang] = useState<Lang>(() => getInitialLang());
   const [isManifestoModalOpen, setIsManifestoModalOpen] = useState(false);
-  const afterSectionTwoRef = useRef<HTMLDivElement | null>(null);
+  const manifestoModalAnchorRef = useRef<HTMLDivElement | null>(null);
 
   const handleLangChange = (nextLang: Lang) => {
     setLang(nextLang);
@@ -75,7 +75,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const el = afterSectionTwoRef.current;
+    const el = manifestoModalAnchorRef.current;
     if (!el) return;
 
     const alreadyShownThisSession = () => {
@@ -157,9 +157,8 @@ function App() {
       </div>
       <HeroSection lang={lang} />
       <SectionTwo lang={lang} />
-      <div ref={afterSectionTwoRef} aria-hidden />
       <SectionThree lang={lang} />
-      <SectionFour lang={lang} />
+      <SectionFour lang={lang} manifestoModalAnchorRef={manifestoModalAnchorRef} />
       <SectionFive lang={lang} />
       <SectionSix lang={lang} />
       <SectionSeven lang={lang} />

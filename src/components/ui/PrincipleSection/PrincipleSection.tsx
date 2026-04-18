@@ -34,6 +34,9 @@ export type PrincipleSectionProps = {
   cards: PrincipleSectionCard[];
   /** Optional extra className for the section */
   className?: string;
+  /** When both are set, ref attaches to the card wrapper at this index (0 = first principle). */
+  manifestoModalAnchorRef?: React.RefObject<HTMLDivElement | null>;
+  manifestoModalAnchorCardIndex?: number;
 };
 
 export default function PrincipleSection({
@@ -43,6 +46,8 @@ export default function PrincipleSection({
   centerBadge,
   cards,
   className,
+  manifestoModalAnchorRef,
+  manifestoModalAnchorCardIndex,
 }: PrincipleSectionProps) {
   const titleContent =
     typeof title === "string" && title.includes("\n")
@@ -99,6 +104,12 @@ export default function PrincipleSection({
         {cards.map((card, i) => (
           <div
             key={i}
+            ref={
+              manifestoModalAnchorRef != null &&
+              manifestoModalAnchorCardIndex === i
+                ? manifestoModalAnchorRef
+                : undefined
+            }
             className={viewClass}
             style={{ transitionDelay: inView ? `${0.25 + i * 0.1}s` : undefined }}
           >

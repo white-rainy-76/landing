@@ -7,6 +7,7 @@ import {
 import type { Lang } from "../../../i18n/types";
 import { DICTIONARY } from "../../../i18n/dictionary";
 import { renderMultiline } from "../../../i18n/renderMultiline";
+import type { RefObject } from "react";
 
 function renderCardDescription(
   description:
@@ -17,7 +18,14 @@ function renderCardDescription(
   return renderMultiline(description.lines.join("\n"));
 }
 
-export default function SectionFour({ lang }: { lang: Lang }) {
+export default function SectionFour({
+  lang,
+  manifestoModalAnchorRef,
+}: {
+  lang: Lang;
+  /** Attached to the Principle 02 card wrapper for scroll-triggered manifesto modal. */
+  manifestoModalAnchorRef?: RefObject<HTMLDivElement | null>;
+}) {
   const t = DICTIONARY[lang].sectionFour;
 
   return (
@@ -26,6 +34,8 @@ export default function SectionFour({ lang }: { lang: Lang }) {
       title={t.title}
       subtitle={t.subtitle}
       centerBadge={t.centerBadge}
+      manifestoModalAnchorRef={manifestoModalAnchorRef}
+      manifestoModalAnchorCardIndex={1}
       cards={[
         {
           icon: <IconPrinciple1 />,

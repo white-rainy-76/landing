@@ -240,7 +240,7 @@ export default function ManifestoScrollModal({
 
   useEffect(() => {
     if (!isOpen) return;
-    trackEvent("manifesto_modal_open", { location: "scroll_30pct" });
+    trackEvent("manifesto_modal_open", { location: "principle_2_in_view" });
   }, [isOpen]);
 
   if (!isOpen) return null;
