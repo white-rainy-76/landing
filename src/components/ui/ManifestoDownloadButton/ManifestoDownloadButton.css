@@ -31,7 +31,7 @@
 }
 
 .manifesto-download-btn:active {
-  transform: translateY(-12px);
+  transform: translateY(12px);
   transition-duration: 80ms;
 }
 
