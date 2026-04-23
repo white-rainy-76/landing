@@ -30,6 +30,11 @@
   color: #53ff9b;
 }
 
+.manifesto-download-btn:active {
+  transform: translateY(-12px);
+  transition-duration: 80ms;
+}
+
 .manifesto-download-btn__icon {
   display: inline-flex;
   align-items: center;
